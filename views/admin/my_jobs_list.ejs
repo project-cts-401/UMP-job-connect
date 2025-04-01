@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="/css/Home.css">
+    <!-- <link rel="stylesheet" href="/projects.css"> -->
+
+    <!-- --------- FONT AWESOME ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>job-connect | posted jobs.</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Posted Jobs</h1>
+    <p><a href="/admin/jobs/new">Post a New Job</a></p>
+
+    <% if (jobs && jobs.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Date Posted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% jobs.forEach(job => { %>
+                    <tr>
+                        <td><%= job.title %></td>
+                        <td><%= job.job_type %></td>
+                        <td><%= job.department || 'N/A' %></td>
+                        <td><%= job.status %></td>
+                        <td><%= new Date(job.created_at).toLocaleDateString() %></td>
+                        <td>
+                            <a href="/admin/jobs/<%= job.id %>/applications">View Applications</a>
+                            </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p class="no-jobs">You have not posted any jobs yet.</p>
+    <% } %>
+</body>
+</html>

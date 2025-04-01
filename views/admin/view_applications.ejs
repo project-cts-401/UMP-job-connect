@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="/css/Home.css">
+    <!-- <link rel="stylesheet" href="/projects.css"> -->
+
+    <!-- --------- FONT AWESOME ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>job-connect | home.</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Applications for: <%= job.title %></h1>
+
+    <div class="job-details">
+        <h2>Job Details</h2>
+        <p><strong>Type:</strong> <%= job.job_type %></p>
+        <p><strong>Department:</strong> <%= job.department || 'N/A' %></p>
+        <p><strong>Description:</strong><br><%= job.description.replace(/\n/g, '<br>') %></p>
+        <% if(job.requirements) { %>
+            <p><strong>Requirements:</strong><br><%= job.requirements.replace(/\n/g, '<br>') %></p>
+        <% } %>
+        <% if(job.deadline) { %>
+             <p><strong>Deadline:</strong> <%= new Date(job.deadline).toLocaleDateString() %></p>
+        <% } %>
+    </div>
+
+     <% if (typeof error !== 'undefined' && error) { %>
+        <div class="error"><%= error %></div>
+    <% } %>
+
+    <h2>Received Applications</h2>
+
+    <% if (applications && applications.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Applicant Name</th>
+                    <th>Applicant Email</th>
+                    <th>Date Applied</th>
+                    <th>Current Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% applications.forEach(app => { %>
+                    <tr>
+                        <td><%= app.student_name %></td>
+                        <td><a href="mailto:<%= app.student_email %>"><%= app.student_email %></a></td>
+                        <td><%= new Date(app.application_date).toLocaleString() %></td>
+                        <td><strong><%= app.status %></strong></td>
+                        <td>
+                            <form action="/admin/applications/<%= app.id %>/status" method="POST" style="display: flex; align-items: center;">
+                                <select name="status" required>
+                                     <% const statuses = ['Submitted', 'Under Review', 'Interviewing', 'Offered', 'Rejected', 'Accepted']; %>
+                                     <% statuses.forEach(s => { %>
+                                        <option value="<%= s %>" <%= app.status === s ? 'selected' : '' %>><%= s %></option>
+                                     <% }) %>
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p class="no-apps">No applications received for this job yet.</p>
+    <% } %>
+
+    <p style="margin-top: 20px;"><a href="/admin/jobs">Back to My Job Postings</a></p>
+
+</body>
+</html>

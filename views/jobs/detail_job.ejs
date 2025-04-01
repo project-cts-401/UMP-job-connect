@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="/css/Home.css">
+    <!-- <link rel="stylesheet" href="/projects.css"> -->
+
+    <!-- --------- FONT AWESOME ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>job-connect | home.</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="job-header">
+        <h1><%= job.title %></h1>
+         <div class="job-meta">
+            <span><strong>Type:</strong> <%= job.job_type %></span>
+            <span><strong>Department:</strong> <%= job.department || 'N/A' %></span>
+            <span><strong>Posted By:</strong> <%= job.admin_name %></span>
+            <span><strong>Posted On:</strong> <%= new Date(job.created_at).toLocaleDateString() %></span>
+            <% if(job.deadline) { %>
+                 <span><strong>Deadline:</strong> <%= new Date(job.deadline).toLocaleDateString() %></span>
+            <% } %>
+             <span><strong>Status:</strong> <%= job.status %></span>
+        </div>
+    </div>
+
+    <div class="job-section">
+        <h2>Description</h2>
+        <p><%- job.description.replace(/\n/g, '<br>') %></p>
+    </div>
+
+    <% if(job.requirements) { %>
+        <div class="job-section">
+            <h2>Requirements</h2>
+             <p><%- job.requirements.replace(/\n/g, '<br>') %></p>
+        </div>
+    <% } %>
+
+    <div class="apply-section">
+        <h2>Apply for this Job</h2>
+
+         <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error"><%= error %></div>
+        <% } %>
+        <% if (typeof message !== 'undefined' && message) { %>
+             <div class="message"><%= message %></div>
+        <% } %>
+
+        <% if (job.status === 'Open' && !(typeof error !== 'undefined' && error && error.includes('already applied'))) { %>
+            <form action="/jobs/<%= job.id %>/apply" method="POST">
+                <button type="submit">Apply Now</button>
+            </form>
+        <% } else if (job.status !== 'Open') { %>
+            <p><i>This job is no longer accepting applications.</i></p>
+        <% } else { %>
+             <p><i>You have already applied for this position.</i></p>
+        <% } %>
+    </div>
+
+
+     <p style="margin-top: 30px;"><a href="/jobs">Back to Job Listings</a></p>
+     <p><a href="/applications/my">View My Applications</a></p>
+
+</body>
+</html>

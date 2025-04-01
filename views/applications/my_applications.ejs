@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="/css/Home.css">
+    <!-- <link rel="stylesheet" href="/projects.css"> -->
+
+    <!-- --------- FONT AWESOME ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>job-connect | home.</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Job Applications</h1>
+
+    <% if (applications && applications.length > 0) { %>
+         <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Date Applied</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% applications.forEach(app => { %>
+                    <tr>
+                        <td><a href="/jobs/<%= app.job_post_id %>"><%= app.job_title %></a></td>
+                        <td><%= new Date(app.application_date).toLocaleString() %></td>
+                        <td class="status"><%= app.status %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+         <p class="no-apps">You have not applied for any jobs yet.</p>
+    <% } %>
+
+     <p style="margin-top: 20px;"><a href="/jobs">Browse Available Jobs</a></p>
+
+</body>
+</html>

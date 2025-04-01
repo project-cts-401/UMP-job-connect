@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="/css/Home.css">
+    <!-- <link rel="stylesheet" href="/projects.css"> -->
+
+    <!-- --------- FONT AWESOME ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>job-connect | job-upload.</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create New Job Post</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="error"><%= error %></div>
+    <% } %>
+
+    <form action="/admin/jobs" method="POST">
+        <div class="form-group">
+            <label for="title">Job Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="job_type">Job Type:</label>
+            <select id="job_type" name="job_type" required>
+                <option value="" disabled selected>Select Job Type</option>
+                <option value="Tutor">Tutor</option>
+                <option value="Mentor">Mentor</option>
+                <option value="Technician">Technician</option>
+                <option value="Research Assistant">Research Assistant</option>
+                <option value="Admin Assistant">Admin Assistant</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Job Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="requirements">Requirements:</label>
+            <textarea id="requirements" name="requirements"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="department">Department (Optional):</label>
+            <input type="text" id="department" name="department">
+        </div>
+         <div class="form-group">
+            <label for="deadline">Application Deadline (Optional):</label>
+            <input type="date" id="deadline" name="deadline">
+        </div>
+
+        <button type="submit">Post Job</button>
+    </form>
+
+    <p style="margin-top: 20px;"><a href="/admin/jobs">Back to My Job Postings</a></p>
+
+</body>
+</html>
