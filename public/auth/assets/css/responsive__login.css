@@ -1,0 +1,87 @@
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .container {
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        box-shadow:  none;
+    }
+
+    .form {
+        padding: 2rem;
+        width: 100%;
+        border-radius: 20px;
+        margin: 0;
+    }
+
+    .Names__div {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    label {
+        display: none;
+    }
+}
+  
+/* Small devices (portrait tablets and large phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .container {
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        box-shadow:  none;
+    }
+
+    .form {
+        padding: 2rem;
+        width: 80%;
+        border-radius: 20px;
+        margin: 0;
+    }
+
+    .inputForm {
+        width: 100%;
+    }
+
+    *{
+        font-size: medium;
+    }
+}
+  
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Your CSS code */
+    *{
+        font-size: medium;
+    }
+
+    .container {
+        width: 80%;
+    }
+
+    .__logo img{
+        width: 270px;
+    }
+
+    .form {
+        width: 85%;
+    }
+}
+  
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* Your CSS code */
+}
+  
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    /* Your CSS code */
+}
+  

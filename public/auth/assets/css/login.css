@@ -1,0 +1,192 @@
+
+/* From Uiverse.io by JohnnyCSilva */ 
+body { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100vh;
+    background-image: url("https://www.ump.ac.za/UMPSite/media/UMPMedia/System/Main%20Banner/main-banner.jpg");
+}
+
+.container {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.758); /* Slightly transparent white */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+    box-shadow: 20px 20px 60px rgba(237, 237, 237, 0.195),
+                -20px -20px 60px rgba(255, 255, 255, 0.127);
+}
+
+
+.__logo img{
+    width: 150px;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 30px;
+    width: 450px;
+    border-radius: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+  
+::placeholder {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+  
+.form button {
+    align-self: flex-end;
+}
+  
+.flex-column > label {
+    color: #151717;
+    font-weight: 100;
+    font-size: 0.8rem;
+}
+  
+.inputForm {
+    border: 1.5px solid #9d9d9d;
+    border-radius: 10px;
+    height: 45px;
+    display: flex;
+    padding: 1px;
+    align-items: center;
+    padding-left: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.inputForm button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: transparent;
+    border: none;
+    margin: 0 0.5em;
+}
+
+.inputForm button i {
+    font-size: large;
+}
+
+.inputForm svg {
+    margin: 1em 0.5em;
+}
+  
+.input {
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 0em 1em;
+}
+
+.Names__div {
+    display: flex;
+    gap: 0.5em;
+}
+  
+.input:focus {
+    outline: none;
+}
+  
+.inputForm:focus-within {
+    border: 1.5px solid hsl(194, 100%, 28%);
+}
+  
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+  
+.flex-row > div > label {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+}
+
+.terms__conditions__div {
+    display: flex;
+    gap: 1rem;
+    font-size: small;
+    margin-top: 0.5rem;
+}
+
+.terms__conditions__div a {
+    text-decoration: none;
+}
+  
+.span {
+    text-decoration: none;
+    font-size: small;
+    margin-left: 5px;
+    color: hsl(194, 100%, 28%);
+    font-weight: 500;
+    cursor: pointer;
+}
+  
+.button-submit {
+    margin: 20px 0 10px 0;
+    background-color: #151717;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.button-submit:hover {
+    background-color: black;
+}
+  
+.p {
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    margin: 5px 0;
+    font-size: small;
+}
+
+.apple, .google {
+    display: flex;
+    flex: 1;
+    text-decoration: none;
+    color: #151717;
+    font-size: small;
+}
+  
+.btn {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    gap: 10px;
+    border: 1px solid #ededef;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+  
+.btn:hover {
+    border: 1px solid hsl(194, 100%, 28%);
+}
+  
+      

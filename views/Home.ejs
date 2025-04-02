@@ -9,7 +9,7 @@
 
     <!-- --------- CSS ---------- -->
     <link rel="stylesheet" href="/css/Home.css">
-    <!-- <link rel="stylesheet" href="/projects.css"> -->
+    <link rel="stylesheet" href="/home/assets/css/style.css">
 
     <!-- --------- FONT AWESOME ---------- -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
@@ -22,8 +22,14 @@
 
     <title>job-connect | home.</title>
 
+    <!-- --------- GOOGLE API --------- -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
 
         *{
             margin: 0;
@@ -33,7 +39,566 @@
         }
     </style>
 </head>
-<body>
-    <h1>Home page/\</h1>
+<body id="top">
+
+    <!-- 
+      - #HEADER
+    -->
+  
+    <header class="header" data-header>
+      <div class="container">
+  
+        <a href="#" class="logo">
+          <ion-icon name="business-outline"></ion-icon> job-connect
+        </a>
+  
+        <nav class="navbar container" data-navbar>
+          <ul class="navbar-list">
+  
+            <li>
+              <a href="#" class="navbar-link" data-nav-link>Home</a>
+            </li>
+  
+            <li>
+              <a href="#" class="navbar-link" data-nav-link>Buy</a>
+            </li>
+  
+            <li>
+              <a href="#" class="navbar-link" data-nav-link>Sell</a>
+            </li>
+  
+            <li>
+              <a href="#" class="navbar-link" data-nav-link>Listing</a>
+            </li>
+  
+            <li>
+              <a href="#" class="navbar-link" data-nav-link>About Us</a>
+            </li>
+  
+            <li>
+              <a href="#" class="navbar-link" data-nav-link>Contact</a>
+            </li>
+  
+          </ul>
+        </nav>
+  
+        <a href="/auth/login" class="btn btn-secondary">Signin</a>
+  
+        <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
+          <ion-icon name="close-outline" aria-hidden="true" class="close-icon"></ion-icon>
+        </button>
+  
+      </div>
+    </header>
+    <main>
+      <article class="article">
+  
+        <!-- 
+          - #HERO
+        -->
+  
+        <section class="section hero" aria-label="hero">
+            <div class="container">
+        
+                <div class="hero-bg">
+                    <div class="hero-content">
+        
+                        <h1 class="h1 hero-title">
+                            Your Gateway to <span class="span">On-Campus</span> Employment
+                        </h1>
+        
+                        <p class="hero-text">
+                            Search and apply for diverse job opportunities like tutoring, mentoring, and technician roles offered by various university departments.
+                        </p>
+        
+                    </div>
+                </div>
+        
+                <div class="hero-form-wrapper">
+                    <form action="/jobs" method="GET" class="hero-form">
+        
+                        <div class="input-wrapper">
+                            <label for="search" class="input-label">Job title:</label>
+                            <input type="search" name="search" id="search" placeholder="Search by title" class="input-field">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </div>
+        
+                        <div class="input-wrapper">
+                            <label for="category" class="input-label">Select job type:</label>
+                            <select name="category" id="category" class="dropdown-list">
+                                <option value="">All Job Types</option>
+                                <option value="Tutor">Tutor</option>
+                                <option value="Mentor">Mentor</option>
+                                <option value="Technician">Technician</option>
+                                <option value="Research Assistant">Research Assistant</option>
+                                <option value="Admin Assistant">Admin Assistant</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+        
+                        <div class="input-wrapper">
+                             <label for="department" class="input-label">Filter by Department/Faculty:</label>
+                             <select name="department" id="department" class="dropdown-list">
+                                 <option value="">All Departments/Faculties</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Library Services / IT Support">Library Services / IT Support</option>
+                                <option value="Faculty of Engineering / Student Affairs">Faculty of Engineering / Student Affairs</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Sociology">Sociology</option>
+                                <option value="Development">Development</option>
+                                </select>
+                        </div>
+        
+                        <button type="submit" class="btn btn-primary">Search Jobs</button>
+        
+                    </form>
+                </div>
+        
+            </div>
+        </section>
+  
+  
+  
+  
+  
+        <!-- 
+          - #ABOUT
+        -->
+  
+        <!-- <section class="section about" aria-label="about">
+          <div class="container">
+  
+            <div class="about-banner img-holder" style="--width: 600; --height: 700;">
+              <img src="/home/assets/images/about-banner.jpg" width="600" height="700" loading="lazy" alt="about banner"
+                class="img-cover">
+  
+              <button class="play-btn" aria-label="play video">
+                <ion-icon name="play" aria-hidden="true"></ion-icon>
+              </button>
+            </div>
+  
+            <div class="about-content">
+  
+              <h2 class="h2 section-title">Efficiency. Transparency. Control.</h2>
+  
+              <p class="section-text">
+                Hously developed a platform for the Real Estate marketplace that allows buyers and sellers to easily
+                execute a
+                transaction on their own. The platform drives efficiency, cost transparency and control into the hands of
+                the consumers.
+                Hously is Real Estate Redefined.
+              </p>
+  
+              <a href="#" class="btn btn-primary">Learn More</a>
+  
+            </div>
+  
+          </div>
+        </section> -->
+  
+  
+  
+  
+  
+        <!-- 
+          - #SERVICE
+        -->
+  
+        <section class="section service" aria-label="service" style="background: rgba(2, 186, 186, 0.027);">
+            <div class="container">
+        
+                <h2 class="h2 section-title">How It Works</h2>
+        
+                <p class="section-text">
+                    Find your next on-campus role in just a few simple steps using our platform.
+                </p>
+        
+                <ul class="service-list">
+        
+                    <li>
+                        <div class="service-card">
+        
+                            <div class="card-icon">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </div>
+        
+                            <h3 class="h3 card-title">Search Opportunities</h3>
+        
+                            <p class="card-text">
+                                Easily find relevant on-campus job openings using keywords and filters for job type or department.
+                            </p>
+        
+                        </div>
+                    </li>
+        
+                    <li>
+                        <div class="service-card">
+        
+                            <div class="card-icon">
+                                <ion-icon name="document-text-outline"></ion-icon>
+                            </div>
+        
+                            <h3 class="h3 card-title">Apply Online</h3>
+        
+                            <p class="card-text">
+                                Our streamlined process makes it simple to review job details and submit your application directly through the platform.
+                            </p>
+        
+                        </div>
+                    </li>
+        
+                    <li>
+                        <div class="service-card">
+        
+                            <div class="card-icon">
+                                 <ion-icon name="eye-outline"></ion-icon>
+                            </div>
+        
+                            <h3 class="h3 card-title">Track Your Status</h3>
+        
+                            <p class="card-text">
+                                Keep track of all your submitted applications and easily monitor their status in your personal dashboard.
+                            </p>
+        
+                        </div>
+                    </li>
+        
+                </ul>
+        
+            </div>
+        </section>
+  
+  
+  
+  
+  
+        <!-- 
+          - #PROPERTY
+        -->
+  
+        <section class="section property" aria-label="property">
+          <div class="container">
+  
+            <h2 class="h2 section-title">Recent Job Postings</h2>
+  
+            <p class="section-text">
+              Check out some of the latest opportunities available right here on campus. 
+            </p>
+  
+            <ul class="property-list">
+                <% if (locals.jobs && jobs.length > 0) { %>
+                    <% jobs.forEach(function(job) { %>
+                        <li>
+                            <div class="property-card">
+                                <figure class="card-banner img-holder" style="--width: 800; --height: 533;">
+                                    <% 
+                                        const jobImageMap = {
+                                            'Tutor': '/images/tutor.jpg',
+                                            'Technician': '/images/tech.jpg',
+                                            'Mentor': '/images/mentor.jpg',
+                                            'Research Assistant': '/images/research.jpg',
+                                            'Admin Assistant': '/images/admin.jpg'
+                                        };
+                                        const jobImage = jobImageMap[job.job_type] || '/images/placeholder-job.jpg';
+                                    %>
+                                    <img src="https://www.ump.ac.za/CMSPages/GetFile.aspx?guid=d26e6308-9636-44db-9db7-b5af76c3d394" width="800" height="500" loading="lazy"
+                                        alt="Image representing <%= job.title %> job" class="img-cover">
+                                </figure>
+            
+                                <div class="card-content">
+                                    <h3 class="h3">
+                                        <a href="/jobs/<%= job.id %>" class="card-title"><%= job.title %></a>
+                                    </h3>
+            
+                                    <ul class="card-list">
+                                        <li class="card-item">
+                                            <div class="item-icon">
+                                              <i class="uil uil-suitcase"></i>
+                                            </div>
+                                            <span class="item-text"><%= job.job_type %></span>
+                                        </li>
+            
+                                        <li class="card-item">
+                                            <div class="item-icon">
+                                              <i class="uil uil-building"></i>
+                                            </div>
+                                            <span class="item-text"><%= job.department || 'N/A' %></span>
+                                        </li>
+            
+                                        <li class="card-item">
+                                            <div class="item-icon">
+                                              <i class="uil uil-calendar-alt"></i>
+                                            </div>
+                                            <span class="item-text"> Posted: <%= new Date(job.created_at).toLocaleDateString() %></span>
+                                        </li>
+            
+                                        <% if (job.deadline) { %>
+                                            <li class="card-item">
+                                                <div class="item-icon">
+                                                  <i class="uil uil-calendar-alt"></i>
+                                                </div>
+                                                <span class="item-text">Apply by: <%= new Date(job.deadline).toLocaleDateString() %></span>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+            
+                                    <div style="margin-top: 15px;">
+                                        <a href="/jobs/<%= job.id %>" class="btn btn-secondary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <p>No job postings currently available.</p>
+                <% } %>
+            </ul>
+            <button class="____btn"><a href="/jobs"> <i class="uil uil-suitcase"></i> view all jobs</a></button>
+  
+          </div>
+        </section>
+        <!-- 
+          - #CONTACT
+        -->
+        <section class="section contact" aria-label="contact">
+          <div class="container">
+  
+            <h2 class="h2 section-title">Have Question ? Get in touch!</h2>
+  
+            <p class="section-text">
+              A great plateform to buy, sell and rent your properties without any agent or commisions.
+            </p>
+  
+            <button class="btn btn-primary">
+              <ion-icon name="call-outline"></ion-icon>
+  
+              <span class="span">Contact us</span>
+            </button>
+  
+          </div>
+        </section>
+        <!-- 
+          - #NEWSLETTER
+        -->
+        <section class="newsletter" aria-label="newsletter">
+          <div class="container">
+  
+            <div class="wrapper">
+              <h2 class="h2 section-title">Subscribe!</h2>
+  
+              <p class="section-text">Subscribe to get latest job updates and nore information.</p>
+            </div>
+  
+            <form action="" class="newsletter-form">
+              <input type="email" name="email_address" placeholder="Enter your email :" aria-label="Enter your email"
+                required class="email-field">
+  
+              <button type="submit" class="btn btn-secondary">Subscribe</button>
+            </form>
+  
+          </div>
+        </section>
+  
+      </article>
+    </main>
+    <!-- 
+      - #FOOTER
+    -->
+    <footer class="footer">
+  
+      <div class="footer-top">
+        <div class="container">
+  
+          <div class="footer-brand">
+  
+            <a href="#" class="logo">
+              <ion-icon name="business-outline"></ion-icon> job-connect
+            </a>
+  
+            <p class="footer-text">
+              A great plateform to buy, sell and rent your properties without any agent or commisions.
+            </p>
+  
+          </div>
+  
+          <ul class="footer-list">
+  
+            <li>
+              <p class="footer-list-title">Company</p>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">About us</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Services</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Pricing</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Blog</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Login</span>
+              </a>
+            </li>
+  
+          </ul>
+  
+          <ul class="footer-list">
+  
+            <li>
+              <p class="footer-list-title">Useful Links</p>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Terms of Services</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Privacy Policy</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Listing</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">
+                <ion-icon name="chevron-forward"></ion-icon>
+  
+                <span class="span">Contact</span>
+              </a>
+            </li>
+  
+          </ul>
+  
+          <ul class="footer-list">
+  
+            <li>
+              <p class="footer-list-title">Contact Details</p>
+            </li>
+  
+            <li class="footer-item">
+              <ion-icon name="location-outline"></ion-icon>
+  
+              <address class="address">
+                C/54 Northwest Freeway,<br>
+                Suite 558,<br>
+                Houston, USA 485
+                <a href="#" class="address-link">View on Google map</a>
+              </address>
+            </li>
+  
+            <li class="footer-item">
+              <ion-icon name="mail-outline"></ion-icon>
+  
+              <a href="mailto:contact@example.com" class="footer-link">contact@example.com</a>
+            </li>
+  
+            <li class="footer-item">
+              <ion-icon name="call-outline"></ion-icon>
+  
+              <a href="tel:+152534468854" class="footer-link">+152 534-468-854</a>
+            </li>
+  
+          </ul>
+  
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        <div class="container">
+  
+          <p class="copyright">
+            &copy; 2022 job-connect. All Right Reserved by <a href="#" class="copyright-link">codewithsadee</a>.
+          </p>
+  
+          <ul class="social-list">
+  
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+  
+          </ul>
+  
+        </div>
+      </div>
+  
+    </footer>
+    <!-- 
+      - #BACK TO TOP
+    -->
+    <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+      <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+    </a>
+    <!-- 
+      - custom js link
+    -->
+    <script src="/home/assets/js/script.js" defer></script>
+  
+    <!-- 
+      - ionicon link
+    -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  
 </body>
 </html>

@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const adminRoutes = require('./routes/admin');
 const jobRoutes = require('./routes/jobs');
 const applicationRoutes = require('./routes/applications');
-const { requireLogin, requireAdmin, requireStudent } = require('./middleware/authMiddleware'); // Import middleware
+const { requireLogin, requireAdmin, requireStudent } = require('./middleware/authMiddleware');
 
 app.use('/', require("./routes/home"));
 app.use('/auth', require("./routes/auth"));
