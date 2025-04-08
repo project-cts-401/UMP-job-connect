@@ -16,6 +16,14 @@
     integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
 
     <!-- --------- FAVICON ---------- -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -60,29 +68,28 @@
             </li>
   
             <li>
-              <a href="#" class="navbar-link" data-nav-link>Buy</a>
-            </li>
-  
-            <li>
-              <a href="#" class="navbar-link" data-nav-link>Sell</a>
-            </li>
-  
-            <li>
-              <a href="#" class="navbar-link" data-nav-link>Listing</a>
-            </li>
-  
-            <li>
               <a href="#" class="navbar-link" data-nav-link>About Us</a>
             </li>
   
             <li>
-              <a href="#" class="navbar-link" data-nav-link>Contact</a>
+              <a href="#" class="navbar-link" data-nav-link>Browse Jobs</a>
             </li>
+  
+            <% if (session && session.role) { %>
+              <% if (session.role === 'student') { %>
+                <li><a href="/applications/my" class="navbar-link" data-nav-link>My Applications</a></li>
+              <% } else if (session.role === 'admin') { %>
+                <li><a href="/admin/jobs" class="navbar-link" data-nav-link>My Postings</a></li>
+                <li><a href="/admin/jobs/new" class="navbar-link" data-nav-link>Post New Job</a></li>
+              <% } %>
   
           </ul>
         </nav>
-  
-        <a href="/auth/login" class="btn btn-secondary">Signin</a>
+        <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+        <% } else { %>
+          <a class="btn btn-secondary" href="/auth/login">Login</a>
+        <% } %>
+        
   
         <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
           <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
@@ -170,7 +177,7 @@
           <div class="container">
   
             <div class="about-banner img-holder" style="--width: 600; --height: 700;">
-              <img src="/home/assets/images/about-banner.jpg" width="600" height="700" loading="lazy" alt="about banner"
+              <img src="https://careersfirst.co.za/wp-content/uploads/2022/08/job_apply1.png" width="600" height="100" loading="lazy" alt="about banner"
                 class="img-cover">
   
               <button class="play-btn" aria-label="play video">
@@ -179,19 +186,15 @@
             </div>
   
             <div class="about-content">
-  
-              <h2 class="h2 section-title">Efficiency. Transparency. Control.</h2>
-  
+
+              <h2 class="h2 section-title">Opportunity. Experience. Connection.</h2>
+          
               <p class="section-text">
-                Hously developed a platform for the Real Estate marketplace that allows buyers and sellers to easily
-                execute a
-                transaction on their own. The platform drives efficiency, cost transparency and control into the hands of
-                the consumers.
-                Hously is Real Estate Redefined.
+                  UMP's official platform connecting students with valuable on-campus jobs and university departments with capable student talent. Easily search, apply, and track applications.
               </p>
-  
-              <a href="#" class="btn btn-primary">Learn More</a>
-  
+          
+              <a href="/jobs" class="btn btn-primary">Browse Open Jobs</a>
+          
             </div>
   
           </div>
@@ -205,7 +208,7 @@
           - #SERVICE
         -->
   
-        <section class="section service" aria-label="service" style="background: rgba(2, 186, 186, 0.027);">
+        <section class="section service" aria-label="service" style="background: rgba(0, 0, 0, 0.056);">
             <div class="container">
         
                 <h2 class="h2 section-title">How It Works</h2>
@@ -269,7 +272,42 @@
             </div>
         </section>
   
-  
+        <section class="section__container explore__container">
+          <h2 class="h2 section-title" >
+              <span>UMP's Diverse Job Opportunities</span> Waiting For You To Explore
+          </h2>
+          <p class="section__description">
+              Discover a variety of opportunities at UMP to gain experience, develop skills, and contribute to the campus community while you study.
+          </p>
+          <div class="explore__grid">
+      
+              <div class="explore__card">
+                  <span><i class="ri-book-open-fill"></i></span> <h4>Tutoring & Academic Support</h4>
+                  </div>
+              <div class="explore__card">
+                  <span><i class="ri-group-fill"></i></span> <h4>Mentoring & Peer Support</h4>
+                  </div>
+              <div class="explore__card">
+                  <span><i class="ri-computer-fill"></i></span> <h4>IT & Technical Support</h4>
+                  </div>
+              <div class="explore__card">
+                  <span><i class="ri-book-2-fill"></i></span> <h4>Library Services</h4>
+                  </div>
+              <div class="explore__card">
+                  <span><i class="ri-clipboard-fill"></i></span> <h4>Administrative & Office Support</h4>
+                  </div>
+              <div class="explore__card">
+                  <span><i class="ri-flask-fill"></i></span> <h4>Research Assistance</h4>
+                  </div>
+              <div class="explore__card">
+                   <span><i class="fa-solid fa-dumbbell"></i></span> <h4>UMP Gym Attendence</h4>
+                  </div>
+              <div class="explore__card">
+                   <span><i class="ri-building-2-fill"></i></span> <h4>Student Residence Assistant</h4>
+                  </div>
+              </div>
+          
+        </section>
   
   
   

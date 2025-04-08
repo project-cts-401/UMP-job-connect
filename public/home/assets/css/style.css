@@ -164,7 +164,7 @@ body {
 .container { padding-inline: 15px; }
 
 .btn {
-  background-color: var(--green-pigment);
+  background-color: #313c91;
   color: var(--white);
   font-weight: var(--fw-500);
   max-width: max-content;
@@ -198,17 +198,15 @@ body {
 .section { padding-block: var(--section-padding); }
 
 .img-holder {
-  aspect-ratio: var(--width) / var(--height);
-  background-color: var(--gainsboro);
 }
 
 .img-cover {
   width: 100%;
-  height: 100%;
+  height: 70%;
   object-fit: cover;
 }
 
-.section-title { color: var(--oxford-blue); }
+.section-title { color: var(--oxford-blue); text-align: center; }
 
 .section-text { line-height: 1.6; }
 
@@ -496,7 +494,7 @@ body {
 
 .service-card .card-icon ion-icon {
   font-size: 30px;
-  color: var(--green-pigment);
+  color: #313c91;
   --ionicon-stroke-width: 45px;
 }
 
@@ -549,7 +547,7 @@ body {
 .property-card .card-title {
   font-size: 1.6rem;
   transition: var(--transition);
-  color: rgb(0, 109, 130);
+  color: #313c91;
 }
 
 .property-card .card-title:is(:hover, :focus) { color: #999; }
@@ -572,7 +570,7 @@ body {
 }
 
 .property-card .item-icon {
-  color: rgb(0, 109, 130);
+  color: #313c91;
   font-size: 16px;
 }
 
@@ -618,9 +616,9 @@ body {
 
 .____btn {
   margin-top: 5.5rem;
-  color: hsl(194, 100%, 28%);
+  color: #313c91;
   background: white;
-  border: 1px solid hsl(194, 100%, 28%);
+  border: 1px solid #313c91;
   padding: 1.15rem;
   border-radius: 23px;
   transition: all 0.35s ease-in-out;
@@ -1175,4 +1173,117 @@ body {
 
   .about .section-text { max-width: unset; }
 
+}
+
+.explore__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+  gap: 1.5em;
+}
+
+.explore__grid {
+  margin-block: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.explore__card {
+  padding: 2.2rem;
+  width: 22%;
+  border-radius: 15px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.explore__card:hover {
+  background-color: var(--primary-color);
+}
+
+.explore__card span {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 10px 20px;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.explore__card:nth-child(1) span {
+  color: #f04a0c;
+  background-color: #f6efef;
+}
+
+.explore__card:nth-child(2) span {
+  color: #6a38c2;
+  background-color: #e9ddff;
+}
+
+.explore__card:nth-child(3) span {
+  color: #ff0101;
+  background-color: #fff2f2;
+}
+
+.explore__card:nth-child(4) span {
+  color: #fbbc09;
+  background-color: #fff8e3;
+}
+
+.explore__card:nth-child(5) span {
+  color: #4680e7;
+  background-color: #e7edf8;
+}
+
+.explore__card:nth-child(6) span {
+  color: #34a753;
+  background-color: #f1fef5;
+}
+
+.explore__card:nth-child(7) span {
+  color: #443ee0;
+  background-color: #f6f5ff;
+}
+
+.explore__card:nth-child(8) span {
+  color: #3ac2ba;
+  background-color: #f0fffe;
+}
+
+.explore__card:hover{
+  background: #000b5a69;
+}
+
+.explore__card:hover span {
+  color: var(--white);
+  background-color: #313c91;
+}
+
+.explore__card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  transition: 0.3s;
+}
+
+.explore__card p {
+  color: var(--text-light);
+  transition: 0.3s;
+}
+
+.explore__card:hover h4 {
+  color: var(--white);
+}
+
+.explore__card:hover p {
+  color: var(--extra-light);
+}
+
+.explore__btn {
+  text-align: center;
 }

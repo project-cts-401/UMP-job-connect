@@ -9,6 +9,7 @@ require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use(session({
     store: new createSqliteStore({
         db: 'sessions.db',
@@ -24,6 +25,11 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
+
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

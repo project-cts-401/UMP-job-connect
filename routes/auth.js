@@ -111,7 +111,8 @@ router.post('/login', (req, res) => {
     if (!identifier || !password) {
         return res.render('login', { error: 'Identifier and password are required.' });
     }
-    
+
+    // --- 1. Check Students Table ---
     const studentSql = `SELECT * FROM students WHERE email = ? OR student_number = ?`;
     db.get(studentSql, [identifier, identifier], (studentErr, studentUser) => {
         if (studentErr) {
@@ -120,7 +121,7 @@ router.post('/login', (req, res) => {
         }
 
         if (studentUser) {
-            
+            // --- Student Found - Compare Password ---
             bcrypt.compare(password, studentUser.password_hash, (compareErr, isMatch) => {
                 if (compareErr) {
                     console.error("Password compare error:", compareErr.message);
@@ -128,18 +129,30 @@ router.post('/login', (req, res) => {
                 }
 
                 if (isMatch) {
-                    
+                    // --- Password Correct - Log In Student ---
                     req.session.userId = studentUser.id;
                     req.session.role = 'student';
-                    
-                    return res.redirect('/jobs');
+
+                    // *** ADDED for Debugging ***
+                    console.log('Session SET after login (Student):', req.session);
+
+                    // *** ADDED Explicit Save before Redirect ***
+                    req.session.save(err => {
+                        if (err) {
+                            console.error("Session save error after student login:", err);
+                            return res.render('login', { error: 'Login successful but session could not be saved. Please try again.' });
+                        }
+                        // Redirect AFTER saving session
+                        return res.redirect('/jobs'); // Or student dashboard etc.
+                    });
                 } else {
-                    
+                    // --- Password Incorrect for Student ---
                     return res.render('login', { error: 'Invalid identifier or password.' });
                 }
-            });
-            
+            }); // End bcrypt.compare for student
+
         } else {
+            // --- 2. Student Not Found - Check Admins Table ---
             const adminSql = `SELECT * FROM faculty_admins WHERE email = ? OR staff_number = ?`;
             db.get(adminSql, [identifier, identifier], (adminErr, adminUser) => {
                 if (adminErr) {
@@ -148,6 +161,7 @@ router.post('/login', (req, res) => {
                 }
 
                 if (adminUser) {
+                    // --- Admin Found - Compare Password ---
                      bcrypt.compare(password, adminUser.password_hash, (compareErr, isMatch) => {
                         if (compareErr) {
                             console.error("Password compare error:", compareErr.message);
@@ -155,29 +169,55 @@ router.post('/login', (req, res) => {
                         }
 
                         if (isMatch) {
+                            // --- Password Correct - Log In Admin ---
                             req.session.userId = adminUser.id;
                             req.session.role = 'admin';
-                            return res.redirect('/admin/jobs');
+
+                            // *** ADDED for Debugging ***
+                            console.log('Session SET after login (Admin):', req.session);
+
+                            // *** ADDED Explicit Save before Redirect ***
+                            req.session.save(err => {
+                                if (err) {
+                                    console.error("Session save error after admin login:", err);
+                                     return res.render('login', { error: 'Login successful but session could not be saved. Please try again.' });
+                                }
+                                // Redirect AFTER saving session
+                                return res.redirect('/admin/jobs'); // Or admin dashboard etc.
+                            });
                         } else {
+                             // --- Password Incorrect for Admin ---
                             return res.render('login', { error: 'Invalid identifier or password.' });
                         }
-                     });
+                     }); // End bcrypt.compare for admin
                 } else {
+                     // --- Identifier Not Found in Either Table ---
                     return res.render('login', { error: 'Invalid identifier or password.' });
                 }
-            });
+            }); // End db.get for admin
         }
-    });
+    }); // End db.get for student
 });
 
-router.get('/logout', (req, res) => {
-    req.session.destroy((err) => {
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
         if (err) {
-            console.error("Logout error:", err);
+            return res.send("Error logging out.");
         }
         res.redirect('/auth/login');
     });
 });
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.send("Error logging out.");
+        }
+        res.redirect('/auth/login');
+    });
+});
+
+
 
 
 module.exports = router;
