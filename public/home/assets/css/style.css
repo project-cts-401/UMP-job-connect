@@ -1255,7 +1255,7 @@ body {
 }
 
 .explore__card:hover{
-  background: #000b5a69;
+  background: #bdbdbd;
 }
 
 .explore__card:hover span {
@@ -1265,7 +1265,7 @@ body {
 
 .explore__card h4 {
   margin-bottom: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #333;
   transition: 0.3s;

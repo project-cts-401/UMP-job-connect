@@ -8,6 +8,7 @@ const db = require('../database/connection');
 // const multer = require('multer');
 // const upload = multer({ dest: path.join(__dirname, '..', 'uploads', 'resumes') });
 
+
 router.get('/', (req, res) => {
     // Access user info potentially set by middleware in res.locals
     const currentUser = res.locals.currentUser; // Expects middleware to set this
@@ -35,7 +36,7 @@ router.get('/', (req, res) => {
             JOIN faculty_admins ON job_posts.posted_by_admin_id = faculty_admins.id
             WHERE job_posts.status = 'Open'
             ORDER BY job_posts.created_at DESC
-            LIMIT ?
+            LIMIT  ?
         `;
         params = [limit];
     }

@@ -49,7 +49,7 @@ app.use('/admin', requireLogin, requireAdmin, adminRoutes); // Requires login AN
 app.use('/jobs', requireLogin, jobRoutes); // Requires login (students apply within specific POST route)
 app.use('/applications', requireLogin, requireStudent, applicationRoutes); // Requires login AND student role
 
-const PORT = process.env.PORT || 2403;
+const PORT = 2403;
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
