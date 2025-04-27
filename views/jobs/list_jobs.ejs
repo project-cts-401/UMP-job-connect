@@ -1,60 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Jobs | UMP</title>
+    <link rel="stylesheet" href="/jobs/css/job-table-style.css">
 
     <!-- --------- UNICONS ---------- -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-    <!-- --------- CSS ---------- -->
-    <link rel="stylesheet" href="/css/Home.css">
-    <!-- <link rel="stylesheet" href="/projects.css"> -->
-
-    <!-- --------- FONT AWESOME ---------- -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
-    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-
-    <!-- --------- FAVICON ---------- -->
+    <!-- --------- GOOGLE API --------- -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 
-    <title>job-connect | home.</title>
-
+    <link rel="stylesheet" href="/jobs/assets/css/styles.css">
+    <link rel="stylesheet" href="/home/assets/css/style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-        *{
+        /* Basic placeholder styling - move to job-table-style.css */
+        
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+        
+        .breadcrumb-placeholder {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .tabs-container {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #f8f8f8;
+            color: #337ab7;
+            cursor: pointer;
+            margin-right: 3px;
+            margin-bottom: -1px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .page-wrapper {
+            color: #333;
+        }
+        
+        .hero-title {
+            font-size: 20px;
+        }
+        
+        font .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        
+        .pagination-links button,
+        .pagination-links span {
+            padding: 5px 8px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            margin: 0 2px;
+            cursor: pointer;
+        }
+        
+        .pagination-links button:disabled {
+            background-color: #eee;
+            cursor: default;
+        }
+        
+        .pagination-links span.current-page {
+            font-weight: bold;
+            background-color: #eee;
+        }
+        
+        .results-count span {
+            margin-right: 5px;
+        }
+        
+        .results-count select {
+            padding: 4px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
-<body>
-    <h1>Available Job Opportunities</h1>
 
-     <% if (jobs && jobs.length > 0) { %>
-        <% jobs.forEach(job => { %>
-            <div class="job-listing">
-                <h2><%= job.title %></h2>
-                <div class="job-meta">
-                    <span><strong>Type:</strong> <%= job.job_type %></span>
-                    <span><strong>Department:</strong> <%= job.department || 'N/A' %></span>
-                     <span><strong>Posted By:</strong> <%= job.admin_name %></span>
-                    <span><strong>Posted On:</strong> <%= new Date(job.created_at).toLocaleDateString() %></span>
-                    <% if(job.deadline) { %>
-                         <span><strong>Deadline:</strong> <%= new Date(job.deadline).toLocaleDateString() %></span>
-                    <% } %>
+<body>
+    <header class="header" data-header>
+        <div class="container">
+
+            <a href="#" class="logo">
+                <ion-icon name="business-outline"></ion-icon> job-connect
+            </a>
+
+            <nav class="navbar container" data-navbar>
+                <ul class="navbar-list">
+
+                    <li>
+                        <a href="/" class="navbar-link" data-nav-link>Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-link" data-nav-link>About Us</a>
+                    </li>
+
+                    <li>
+                        <a href="/jobs" class="navbar-link" data-nav-link>Browse Jobs</a>
+                    </li>
+
+                    <% if (session && session.role) { %>
+                        <% if (session.role === 'student') { %>
+                            <li><a href="/applications/my" class="navbar-link" data-nav-link>My Applications</a></li>
+                            <% } else if (session.role === 'admin') { %>
+                                <li><a href="/admin/jobs" class="navbar-link" data-nav-link>My Postings</a></li>
+                                <li><a href="/admin/jobs/new" class="navbar-link" data-nav-link>Post New Job</a></li>
+                                <% } %>
+
+                </ul>
+            </nav>
+            <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+            <% } else { %>
+                <a class="btn btn-secondary" href="/auth/login">Login</a>
+                <% } %>
+
+
+                    <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
+          <ion-icon name="close-outline" aria-hidden="true" class="close-icon"></ion-icon>
+        </button>
+
+        </div>
+    </header>
+
+    <main>
+        <article class="article">
+
+            <!-- 
+          - #HERO
+        -->
+
+            <section class="section hero" aria-label="hero">
+                <div class="container">
+                    <div class="hero-bg">
+                        <div class="hero-content">
+
+                            <!-- <p class="hero-text">
+                                Search and apply for diverse job opportunities like tutoring, mentoring, and technician roles offered by various university departments.
+                            </p> -->
+                        </div>
+                    </div>
+
+                    <div class="hero-form-wrapper">
+                        <form class="hero-form" action="/jobs" method="GET">
+                            <div class="input-wrapper">
+                                <label for="search" class="input-label">Job title:</label>
+                                <input type="search" name="search" id="search" placeholder="Search by title" class="input-field">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="category" class="input-label">Select job type:</label>
+                                <select name="category" id="category" class="dropdown-list">
+                            <option value="">All Job Types</option>
+                            <option value="Tutor">Tutor</option>
+                            <option value="Mentor">Mentor</option>
+                            <option value="Technician">Technician</option>
+                            <option value="Research Assistant">Research Assistant</option>
+                            <option value="Admin Assistant">Admin Assistant</option>
+                            <option value="Other">Other</option>
+                        </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="department" class="input-label">Filter by Department/Faculty:</label>
+                                <select name="department" id="department" class="dropdown-list">
+                            <option value="">All Departments/Faculties</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Library Services / IT Support">Library Services / IT Support</option>
+                            <option value="Faculty of Engineering / Student Affairs">Faculty of Engineering / Student Affairs</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Sociology">Sociology</option>
+                            <option value="Development">Development</option>
+                            </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search Jobs</button>
+                        </form>
+                    </div>
                 </div>
-                <p><%- job.description.substring(0, 150) %>...</p> <a href="/jobs/<%= job.id %>" class="view-details-btn">View Details & Apply</a>
+            </section>
+        </article>
+    </main>
+
+    <div class="page-wrapper">
+
+        <div class="breadcrumb-placeholder">
+        </div>
+
+        <div class="page-header">
+            <h1>View All Jobs</h1>
+            <button class="search-again-btn">Search Again</button>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tab">Quick Job Search</div>
+            <div class="tab active">Results</div>
+        </div>
+
+        <div class="pagination-controls">
+            <div class="pagination-links">
+                <button disabled>&lt;&lt;</button>
+                <button disabled>&lt;</button>
+                <span class="current-page">1</span>
+                <button disabled>&gt;</button>
+                <button disabled>&gt;&gt;</button>
             </div>
-        <% }) %>
-    <% } else { %>
-        <p class="no-jobs">No open job positions available at the moment.</p>
-    <% } %>
+            <div class="results-count">
+                <% if (locals.jobs) { %>
+                    <span>Displaying 1 - <%= jobs.length %> of <%= jobs.length %></span>
+                    <% } else { %>
+                        <span>Displaying 0 - 0 of 0</span>
+                        <% } %>
+                            <select name="perPage" id="perPage">
+                    <option value="10">10</option>
+                </select> per page
+            </div>
+        </div>
+
+        <div class="jobs-content">
+            <h2>Jobs</h2>
+
+            <% if (locals.jobs && jobs.length > 0) { %>
+                <table class="job-table-screenshot">
+                    <thead>
+                        <tr>
+                            <th>DATE OPENED</th>
+                            <th>REQ ID #</th>
+                            <th>JOB TITLE</th>
+                            <th>LOCATION</th>
+                            <th>JOB TYPE</th>
+                            <th>ORGANISATIONAL UNIT</th>
+                            <th>ADVERT CLOSED DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% jobs.forEach(job => { %>
+                            <tr>
+                                <td>
+                                    <%= new Date(job.created_at).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= job.id %>
+                                </td>
+                                <td>
+                                    <a href="/jobs/<%= job.id %>">
+                                        <%= job.title %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= job.location || 'N/A' %>
+                                </td>
+                                <td>
+                                    <%= job.job_type %>
+                                </td>
+                                <!-- {/* Assuming job_type maps to 'Academic Position'/'Support Position' etc. */} -->
+                                <td>
+                                    <%= job.department || 'N/A' %>
+                                </td>
+                                <td>
+                                    <% if(job.deadline) { %>
+                                        <%= new Date(job.deadline).toLocaleDateString() %>
+                                            <% } else { %>
+                                                N/A
+                                                <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } else { %>
+                    <p class="no-jobs">No open job positions available at the moment.</p>
+                    <% } %>
+        </div>
+
+        <div class="footer-info">
+            APP V7.40.1.3 <br> Last date: 2025-04-27 17:40:12
+        </div>
+
+    </div>
+    <!-- 
+      - #FOOTER
+    -->
+    <footer class="footer">
+
+        <div class="footer-top">
+            <div class="container">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo">
+                        <ion-icon name="business-outline"></ion-icon> job-connect
+                    </a>
+
+                    <p class="footer-text">
+                        A great plateform to buy, sell and rent your properties without any agent or commisions.
+                    </p>
+
+                </div>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Company</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">About us</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Services</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Pricing</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Blog</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Login</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Useful Links</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Terms of Services</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Privacy Policy</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Listing</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward"></ion-icon>
+
+                            <span class="span">Contact</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Contact Details</p>
+                    </li>
+
+                    <li class="footer-item">
+                        <ion-icon name="location-outline"></ion-icon>
+
+                        <address class="address">
+                C/54 Northwest Freeway,<br>
+                Suite 558,<br>
+                Houston, USA 485
+                <a href="#" class="address-link">View on Google map</a>
+              </address>
+                    </li>
+
+                    <li class="footer-item">
+                        <ion-icon name="mail-outline"></ion-icon>
+
+                        <a href="mailto:contact@example.com" class="footer-link">contact@example.com</a>
+                    </li>
+
+                    <li class="footer-item">
+                        <ion-icon name="call-outline"></ion-icon>
+
+                        <a href="tel:+152534468854" class="footer-link">+152 534-468-854</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    &copy; 2022 job-connect. All Right Reserved by <a href="#" class="copyright-link">codewithsadee</a>.
+                </p>
+
+                <ul class="social-list">
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <a href="#" class="back-to-top-screenshot" aria-label="Back to top">&uarr;</a>
+
+    <script src="/jobs/js/job-table-script.js"></script>
 
 </body>
+
 </html>
