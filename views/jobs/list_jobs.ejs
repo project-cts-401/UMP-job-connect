@@ -7,6 +7,10 @@
     <title>View All Jobs | UMP</title>
     <link rel="stylesheet" href="/jobs/css/job-table-style.css">
 
+    <!-- --------- FONT AWESOME ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+
     <!-- --------- UNICONS ---------- -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
@@ -99,18 +103,24 @@
         }
         
         .results-count select {
+            border-radius: 5px;
+        }
+        
+        results-count .results-count select {
             padding: 4px;
             border: 1px solid #ccc;
         }
     </style>
 </head>
+<chat-bot platform_id="b4f95226-505a-4958-af71-e06ab928b25e" user_id="4bb7148c-5509-46c4-8af0-2ee2674908d3" chatbot_id="574cefc0-9d08-47b1-a13e-d1ed3053dd36"><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">chatsimple</a></chat-bot>
+<script src="https://cdn.chatsimple.ai/chat-bot-loader.js" defer></script>
 
 <body>
     <header class="header" data-header>
         <div class="container">
 
             <a href="#" class="logo">
-                <ion-icon name="business-outline"></ion-icon> job-connect
+                <ion-icon name="business-outline"></ion-icon><i class="fa-solid fa-briefcase"></i> All Jobs
             </a>
 
             <nav class="navbar container" data-navbar>
@@ -190,7 +200,7 @@
                         </select>
                             </div>
                             <div class="input-wrapper">
-                                <label for="department" class="input-label">Filter by Department/Faculty:</label>
+                                <label for="department" class="input-label">Filter by Faculty:</label>
                                 <select name="department" id="department" class="dropdown-list">
                             <option value="">All Departments/Faculties</option>
                             <option value="Computer Science">Computer Science</option>
@@ -236,11 +246,11 @@
                 <% if (locals.jobs) { %>
                     <span>Displaying 1 - <%= jobs.length %> of <%= jobs.length %></span>
                     <% } else { %>
-                        <span>Displaying 0 - 0 of 0</span>
+                        <span>Page 0 - 0 of 0</span>
                         <% } %>
                             <select name="perPage" id="perPage">
                     <option value="10">10</option>
-                </select> per page
+                </select>
             </div>
         </div>
 
@@ -488,7 +498,7 @@
     </footer>
 
     <a href="#" class="back-to-top-screenshot" aria-label="Back to top">&uarr;</a>
-
+    <script src="/home/assets/js/script.js" defer></script>
     <script src="/jobs/js/job-table-script.js"></script>
 
 </body>
