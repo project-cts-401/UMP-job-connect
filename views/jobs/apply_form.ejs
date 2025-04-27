@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for
+        <%= job.title %> | UMP Job Connect</title>
+
+    <link rel="stylesheet" href="/home/assets/css/style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1,
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 1.8em;
+        }
+        
+        h2 {
+            font-size: 1.4em;
+            text-align: left;
+            margin-top: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        input[type="file"] {
+            border: 1px solid #ccc;
+            padding: 8px;
+            width: 100%;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .input-group>div {
+            flex: 1;
+        }
+        
+        .input-group>div.fixed-width {
+            flex: 0 0 100px;
+        }
+        
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        
+        .required-note {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .upload-section {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .upload-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: none;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="shortcut icon" href="/home/assets/images/favicon.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <h1>Apply for:
+            <%= job.title %>
+        </h1>
+        <p style="text-align: center; font-style: italic; margin-bottom: 25px;">Appointment Form C - Student Assistant, Demonstrator, Tutor and Mentor</p>
+
+
+        <% if (locals.error && error) { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+            <% } %>
+                <% if (locals.message && message) { %>
+                    <div class="success-message">
+                        <%= message %>
+                    </div>
+                    <% } %>
+
+
+
+                        <form action="/jobs/<%= job.id %>/apply" method="post" enctype="multipart/form-data">
+
+                            <h2>Personal Details</h2>
+
+
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" id="title" name="title" required value="<%= typeof formData !== 'undefined' && formData.title ? formData.title : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="initials">Initials:</label>
+                                <input type="text" id="initials" name="initials" maxlength="5" value="<%= typeof formData !== 'undefined' && formData.initials ? formData.initials : '' %>">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="identity_number">Identity Number:</label>
+                                <input type="text" id="identity_number" name="identity_number" required pattern="\d{13}" title="Please enter a 13-digit South African ID number" value="<%= typeof formData !== 'undefined' && formData.identity_number ? formData.identity_number : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Duration of Potential Appointment:</label>
+                                <div class="input-group">
+                                    <div>
+                                        <label for="appointment_from" style="font-weight: normal;">From:</label>
+                                        <input type="date" id="appointment_from" name="appointment_from" required value="<%= typeof formData !== 'undefined' && formData.appointment_from ? formData.appointment_from : '' %>">
+                                    </div>
+                                    <div>
+                                        <label for="appointment_to" style="font-weight: normal;">To:</label>
+                                        <input type="date" id="appointment_to" name="appointment_to" required value="<%= typeof formData !== 'undefined' && formData.appointment_to ? formData.appointment_to : '' %>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>Contact Information</h2>
+
+                            <div class="form-group">
+                                <label for="postal_address">Postal Address:</label>
+                                <textarea id="postal_address" name="postal_address" rows="3" required><%= typeof formData !== 'undefined' && formData.postal_address ? formData.postal_address : '' %></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="postal_code">Postal Code:</label>
+                                <input type="text" id="postal_code" name="postal_code" pattern="\d{4}" title="Please enter a 4-digit postal code" required class="fixed-width" value="<%= typeof formData !== 'undefined' && formData.postal_code ? formData.postal_code : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="residential_address">Residential Address:</label>
+                                <textarea id="residential_address" name="residential_address" rows="3" required><%= typeof formData !== 'undefined' && formData.residential_address ? formData.residential_address : '' %></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="residential_code">Residential Code:</label>
+                                <input type="text" id="residential_code" name="residential_code" pattern="\d{4}" title="Please enter a 4-digit postal code" required class="fixed-width" value="<%= typeof formData !== 'undefined' && formData.residential_code ? formData.residential_code : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cellular_phone">Cellular Phone:</label>
+                                <input type="tel" id="cellular_phone" name="cellular_phone" required pattern="[0-9]{10}" title="Please enter a 10-digit phone number" value="<%= typeof formData !== 'undefined' && formData.cellular_phone ? formData.cellular_phone : '' %>">
+                            </div>
+
+
+                            <h2>Banking & Tax Information</h2>
+
+                            <div class="input-group">
+                                <div>
+                                    <label for="bank_name">Bank Name:</label>
+                                    <input type="text" id="bank_name" name="bank_name" required value="<%= typeof formData !== 'undefined' && formData.bank_name ? formData.bank_name : '' %>">
+                                </div>
+                                <div class="fixed-width">
+                                    <label for="branch_code">Branch Code:</label>
+                                    <input type="text" id="branch_code" name="branch_code" required pattern="\d{6}" title="Please enter a 6-digit branch code" value="<%= typeof formData !== 'undefined' && formData.branch_code ? formData.branch_code : '' %>">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="account_number">Account Number:</label>
+                                <input type="text" id="account_number" name="account_number" required pattern="\d+" value="<%= typeof formData !== 'undefined' && formData.account_number ? formData.account_number : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="account_holder_name">Account Holder Name:</label>
+                                <input type="text" id="account_holder_name" name="account_holder_name" required value="<%= typeof formData !== 'undefined' && formData.account_holder_name ? formData.account_holder_name : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="income_tax_number">Income Tax Number:</label>
+                                <input type="text" id="income_tax_number" name="income_tax_number" pattern="\d+" value="<%= typeof formData !== 'undefined' && formData.income_tax_number ? formData.income_tax_number : '' %>">
+                                <p class="required-note">If available.</p>
+                            </div>
+
+
+                            <div class="upload-section">
+                                <h2>Required Documents</h2>
+                                <p class="required-note">Please upload the following documents in PDF format only (Max 5MB each).</p>
+
+                                <div class="form-group">
+                                    <label for="id_document">1. Copy of Identity Document (PDF):</label>
+                                    <input type="file" id="id_document" name="id_document" accept=".pdf" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tax_proof">2. Proof of Income Tax Number (PDF):</label>
+                                    <input type="file" id="tax_proof" name="tax_proof" accept=".pdf">
+                                    <p class="required-note">Upload proof if you have an Income Tax Number.</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bank_proof">3. Proof of Bank Account Number (PDF):</label>
+                                    <input type="file" id="bank_proof" name="bank_proof" accept=".pdf" required>
+                                    <p class="required-note">E.g., Copy of bank statement or print out from internet banking showing account holder name and account number.</p>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group" style="margin-top: 25px;">
+                                <label for="submission_date">Submission Date:</label>
+                                <input type="date" id="submission_date" name="submission_date" required value="<%= typeof formData !== 'undefined' && formData.submission_date ? formData.submission_date : '' %>">
+                                <p class="required-note">By submitting this form, you confirm that the information provided is accurate.</p>
+                            </div>
+
+
+                            <button type="submit">Submit Application</button>
+
+                            <div style="text-align: center; margin-top: 20px;">
+                                <a href="/jobs/<%= job.id %>" style="color: #555; text-decoration: none;">Cancel and return to Job Details</a>
+                            </div>
+
+                        </form>
+    </div>
+
+
+
+</body>
+
+</html>
