@@ -1,89 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- --------- UNICONS ---------- -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-    <!-- --------- CSS ---------- -->
-    <link rel="stylesheet" href="/css/Home.css">
-    <!-- <link rel="stylesheet" href="/projects.css"> -->
+    <link rel="stylesheet" href="/jobs/assets/css/styles.css">
+    <link rel="stylesheet" href="/home/assets/css/style.css">
 
-    <!-- --------- FONT AWESOME ---------- -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
-    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
 
-    <!-- --------- FAVICON ---------- -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-
-    <title>job-connect | home.</title>
+    <link rel="shortcut icon" href="/home/assets/images/favicon.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>
+        <%= job.title %> | job-connect</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-        *{
-            margin: 0;
+        /* =========================================== */
+        /* Enhanced Styles for Job Detail Page        */
+        /* (Ideally, move these to style.css)      */
+        /* =========================================== */
+        
+        .job-detail-section {
+            padding-top: 120px;
+            /* Adjust space below fixed header */
+            padding-bottom: var(--section-padding);
+            background-color: hsla(220, 13%, 91%, 0.1);
+            /* Subtle background for page */
+        }
+        
+        .job-detail-container {
+            max-width: 1100px;
+            /* Allow wider container for columns */
+            margin: 0 auto;
+            background: none;
+            /* Remove background from container itself */
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            /* Remove padding from container */
+            box-shadow: none;
+            /* Remove shadow from container */
+        }
+        /* Two-column layout */
+        
+        .job-detail-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            /* Main column and fixed-width sidebar */
+            gap: 40px;
+            /* Gap between columns */
+            align-items: flex-start;
+            /* Align items to the top */
+        }
+        
+        .main-column {
+            background-color: var(--white);
+            padding: 35px;
+            border-radius: var(--radius-12);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .sidebar-column {
+            position: sticky;
+            /* Make sidebar sticky */
+            top: 100px;
+            /* Position below fixed header (adjust) */
+        }
+        
+        .sidebar-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: var(--radius-12);
+            box-shadow: var(--shadow-2);
+            margin-bottom: 25px;
+            /* Space between sidebar cards if multiple */
+        }
+        
+        .job-image-banner {
+            width: 100%;
+            margin-bottom: 30px;
+            border-radius: var(--radius-6);
+            overflow: hidden;
+        }
+        
+        .job-image-banner img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 21 / 9;
+            /* Wider banner aspect ratio */
+            object-fit: cover;
+        }
+        /* Main column content */
+        
+        .main-column h1 {
+            color: var(--oxford-blue);
+            font-size: 2.5rem;
+            /* Slightly larger title */
+            font-weight: var(--fw-700);
+            /* Bolder title */
+            margin-bottom: 30px;
+            line-height: 1.3;
+            border-bottom: 1px solid var(--gainsboro);
+            padding-bottom: 20px;
+        }
+        
+        .job-section {
+            margin-bottom: 35px;
+        }
+        
+        .job-section h2 {
+            color: var(--oxford-blue);
+            font-size: var(--fs-3);
+            font-weight: var(--fw-600);
+            /* Slightly bolder section titles */
+            margin-bottom: 15px;
+        }
+        
+        .job-section p {
+            line-height: 1.8;
+            /* Increased line height */
+            color: var(--gunmetal);
+        }
+        
+        .job-section p br {
+            /* Add space after explicit line breaks */
+            content: "";
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        /* Sidebar content */
+        
+        .sidebar-card h3 {
+            /* Title for sidebar sections */
+            color: var(--oxford-blue);
+            font-size: var(--fs-4);
+            font-weight: var(--fw-600);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gainsboro);
+        }
+        
+        .job-meta ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .job-meta li {
+            font-size: 0.95em;
+            color: var(--manatee);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Increased gap */
+            margin-bottom: 15px;
+            /* Space between meta items */
+        }
+        
+        .job-meta li i {
+            color: var(--green-pigment);
+            font-size: 1.3em;
+            /* Larger icons */
+            width: 20px;
+            /* Fixed width for alignment */
+            text-align: center;
+        }
+        
+        .job-meta strong {
+            color: var(--gunmetal);
+            font-weight: var(--fw-500);
+            margin-right: 5px;
+            /* Space after label */
+        }
+        
+        .job-status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: var(--radius-4);
+            font-size: 0.85em;
+            font-weight: var(--fw-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .job-status-badge.open {
+            background-color: hsla(146, 41%, 97%, 1);
+            /* Light green */
+            color: var(--sea-green);
+            /* Dark green text */
+            border: 1px solid hsla(146, 41%, 80%, 1);
+        }
+        
+        .job-status-badge.closed {
+            background-color: #f8f9fa;
+            /* Light grey */
+            color: var(--manatee);
+            border: 1px solid var(--gainsboro);
+        }
+        /* Apply Section in Sidebar */
+        
+        .apply-section {
+            margin-top: 0;
+            /* Remove top margin if inside card */
+            padding: 0;
+            /* Remove padding if inside card */
+            background-color: transparent;
+            /* No extra background */
+            border-radius: 0;
+            text-align: left;
+            /* Align text left in sidebar */
+        }
+        
+        .apply-section .error,
+        .apply-section .message {
+            padding: 12px;
+            margin-top: 15px;
+            /* Add space above messages */
+            margin-bottom: 15px;
+            border-radius: var(--radius-4);
+            font-weight: var(--fw-500);
+            font-size: 0.9em;
+        }
+        
+        .apply-section .error {
+            /* Styles from theme */
+        }
+        
+        .apply-section .message {
+            /* Styles from theme */
+        }
+        
+        .apply-section form {
+            margin-bottom: 10px;
+        }
+        
+        .apply-section button[type="submit"] {
+            /* Use theme button styles */
+            display: block;
+            /* Make button full width */
+            width: 100%;
+            text-align: center;
+            background-color: var(--green-pigment);
+            color: var(--white);
+            font-weight: var(--fw-500);
+            padding: 15px;
+            /* Larger padding */
+            border-radius: var(--radius-6);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.25s ease;
+            font-size: 1.1em;
+        }
+        
+        .apply-section button[type="submit"]:hover,
+        .apply-section button[type="submit"]:focus {
+            background-color: var(--sea-green);
+        }
+        
+        .apply-section p {
+            /* Status text */
+            color: var(--gunmetal);
+            font-size: 0.95em;
+            text-align: center;
+            /* Center status text */
+            padding: 10px 0;
+        }
+        
+        .apply-section p i {
+            color: var(--manatee);
+        }
+        
+        .apply-section p a {
+            /* Login link */
+            color: var(--green-pigment);
+            font-weight: var(--fw-500);
+        }
+        
+        .back-links {
+            /* Centered below main content */
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .back-links a {
+            color: var(--green-pigment);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: var(--fw-500);
+            transition: color 0.2s ease;
+        }
+        
+        .back-links a:hover {
+            text-decoration: underline;
+            color: var(--sea-green);
+        }
+        /* Responsive Adjustments */
+        
+        @media (max-width: 992px) {
+            .job-detail-content-wrapper {
+                grid-template-columns: 1fr;
+                /* Stack columns */
+                gap: 30px;
+            }
+            .sidebar-column {
+                position: static;
+                /* Remove sticky position */
+                top: auto;
+            }
+            .main-column h1 {
+                font-size: 2rem;
+                /* Adjust title size */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-column {
+                padding: 25px;
+            }
+            .sidebar-card {
+                padding: 20px;
+            }
+            .job-meta {
+                grid-template-columns: 1fr;
+                /* Single column for meta */
+            }
         }
     </style>
 </head>
-<body>
-    <div class="job-header">
-        <h1><%= job.title %></h1>
-         <div class="job-meta">
-            <span><strong>Type:</strong> <%= job.job_type %></span>
-            <span><strong>Department:</strong> <%= job.department || 'N/A' %></span>
-            <span><strong>Posted By:</strong> <%= job.admin_name %></span>
-            <span><strong>Posted On:</strong> <%= new Date(job.created_at).toLocaleDateString() %></span>
-            <% if(job.deadline) { %>
-                 <span><strong>Deadline:</strong> <%= new Date(job.deadline).toLocaleDateString() %></span>
-            <% } %>
-             <span><strong>Status:</strong> <%= job.status %></span>
+
+<body id="top">
+
+    <header class="header" data-header>
+        <div class="container">
+            <a href="/" class="logo">
+                <ion-icon name="business-outline"></ion-icon> job-connect </a>
+            <nav class="navbar container" data-navbar>
+                <ul class="navbar-list">
+                    <li><a href="/" class="navbar-link" data-nav-link>Home</a></li>
+                    <li><a href="/about" class="navbar-link" data-nav-link>About Us</a></li>
+                    <li><a href="/jobs" class="navbar-link" data-nav-link>Browse Jobs</a></li>
+                    <% if (locals.session && session.role) { %>
+                        <% if (session.role === 'student') { %>
+                            <li><a href="/applications/my" class="navbar-link" data-nav-link>My Applications</a></li>
+                            <% } else if (session.role === 'admin') { %>
+                                <li><a href="/admin/jobs" class="navbar-link" data-nav-link>My Postings</a></li>
+                                <li><a href="/admin/jobs/new" class="navbar-link" data-nav-link>Post New Job</a></li>
+                                <% } %>
+                                    <% } %>
+                </ul>
+            </nav>
+            <% if (locals.session && session.role) { %>
+                <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+                <% } else { %>
+                    <a class="btn btn-secondary" href="/auth/login">Login</a>
+                    <% } %>
+                        <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+                <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
+                <ion-icon name="close-outline" aria-hidden="true" class="close-icon"></ion-icon>
+            </button>
         </div>
-    </div>
+    </header>
+    <main>
+        <article>
 
-    <div class="job-section">
-        <h2>Description</h2>
-        <p><%- job.description.replace(/\n/g, '<br>') %></p>
-    </div>
+            <section class="section job-detail-section">
+                <div class="container job-detail-container">
 
-    <% if(job.requirements) { %>
-        <div class="job-section">
-            <h2>Requirements</h2>
-             <p><%- job.requirements.replace(/\n/g, '<br>') %></p>
-        </div>
-    <% } %>
+                    <div class="job-detail-content-wrapper">
 
-    <div class="apply-section">
-        <h2>Apply for this Job</h2>
+                        <div class="main-column">
+                            <%# Optional Image Banner %>
+                                <div class="job-image-banner">
+                                    <% 
+                                const jobImageMap = { /* Same map as before */
+                                    'Tutor': '/images/tutor.jpg', 'Technician': '/images/tech.jpg', 'Mentor': '/images/mentor.jpg', 
+                                    'Research Assistant': '/images/research.jpg', 'Admin Assistant': '/images/admin.jpg', 'Other': '/images/placeholder-job.jpg'
+                                };
+                                const jobImage = jobImageMap[job.job_type] || '/images/placeholder-job.jpg';
+                                %>
+                                        <img src="https://th.bing.com/th/id/R.81a837de2b70566973ac5e1fa607fb40?rik=p9QS55r2P5Jshg&pid=ImgRaw&r=0" alt="<%= job.title %> related image">
+                                </div>
 
-         <% if (typeof error !== 'undefined' && error) { %>
-            <div class="error"><%= error %></div>
-        <% } %>
-        <% if (typeof message !== 'undefined' && message) { %>
-             <div class="message"><%= message %></div>
-        <% } %>
+                                <h1>
+                                    <%= job.title %>
+                                </h1>
 
-        <% if (job.status === 'Open' && !(typeof error !== 'undefined' && error && error.includes('already applied'))) { %>
-            <form action="/jobs/<%= job.id %>/apply" method="POST">
-                <button type="submit">Apply Now</button>
-            </form>
-        <% } else if (job.status !== 'Open') { %>
-            <p><i>This job is no longer accepting applications.</i></p>
-        <% } else { %>
-             <p><i>You have already applied for this position.</i></p>
-        <% } %>
-    </div>
+                                <div class="job-section">
+                                    <h2><i class="uil uil-file-alt"></i> Description</h2>
+                                    <p>
+                                        <%- job.description ? job.description.replace(/\n/g, '<br>') : 'No description provided.' %></p>
+                                </div>
+
+                                <% if(job.requirements) { %>
+                                    <div class="job-section">
+                                        <h2><i class="uil uil-check-square"></i> Requirements</h2>
+                                        <p>
+                                            <%- job.requirements.replace(/\n/g, '<br>') %></p>
+                                    </div>
+                                    <% } %>
+
+                                        <div class="back-links">
+                                            <a href="/jobs"> <i class="uil uil-arrow-left"></i> Back to Job Listings</a>
+                                        </div>
+                        </div>
+
+                        <div class="sidebar-column">
+                            <div class="sidebar-card">
+                                <h3><i class="uil uil-info-circle"></i> Job Details</h3>
+                                <div class="job-meta">
+                                    <ul>
+                                        <li><i class="uil uil-suitcase"></i>
+                                            <div><strong>Type:</strong>
+                                                <%= job.job_type %>
+                                            </div>
+                                        </li>
+                                        <li><i class="uil uil-building"></i>
+                                            <div><strong>Department:</strong>
+                                                <%= job.department || 'N/A' %>
+                                            </div>
+                                        </li>
+                                        <li><i class="uil uil-user-check"></i>
+                                            <div><strong>Posted By:</strong>
+                                                <%= job.admin_name %>
+                                            </div>
+                                        </li>
+                                        <li><i class="uil uil-calendar-alt"></i>
+                                            <div><strong>Posted On:</strong>
+                                                <%= new Date(job.created_at).toLocaleDateString() %>
+                                            </div>
+                                        </li>
+                                        <% if(job.deadline) { %>
+                                            <li><i class="uil uil-calendar-alt" style="color: var(--maximum-red)"></i>
+                                                <div><strong>Deadline:</strong>
+                                                    <%= new Date(job.deadline).toLocaleDateString() %>
+                                                </div>
+                                            </li>
+                                            <% } %>
+                                                <li><i class="uil uil-check-circle"></i>
+                                                    <div><strong>Status:</strong>
+                                                        <span class="job-status-badge <%= job.status === 'Open' ? 'open' : 'closed' %>">
+                                                    <%= job.status %>
+                                                </span>
+                                                    </div>
+                                                </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="sidebar-card">
+                                <h3><i class="uil uil-edit-alt"></i> Apply</h3>
+                                <div class="apply-section">
+                                    <%# Display Error/Success Messages %>
+                                        <% if (locals.error) { %>
+                                            <div class="error">
+                                                <%= error %>
+                                            </div>
+                                            <% } %>
+                                                <% if (locals.message) { %>
+                                                    <div class="message">
+                                                        <%= message %>
+                                                    </div>
+                                                    <% } %>
+
+                                                        <%# Apply Button Logic %>
+                                                            <% if (job.status === 'Open' && !(locals.error && error.includes('already applied'))) { %>
+                                                                <% if (locals.session && session.role === 'student') { %>
+                                                                    <form action="/jobs/<%= job.id %>/apply" method="POST">
+                                                                        <button type="submit" class="btn btn-primary">Apply Now</button>
+                                                                    </form>
+                                                                    <% } else if (!locals.session) { %>
+                                                                        <p><i>Please <a href="/auth/login?redirect=/jobs/<%= job.id %>">login</a> as a student to apply.</i></p>
+                                                                        <% } else { %>
+                                                                            <p><i>Only students can apply for jobs.</i></p>
+                                                                            <% } %>
+                                                                                <% } else if (job.status !== 'Open') { %>
+                                                                                    <p><i>This job is no longer accepting applications.</i></p>
+                                                                                    <% } else if (locals.error && error.includes('already applied')) { %>
+                                                                                        <p><i>You have already applied for this position.</i></p>
+                                                                                        <%# Optionally link to their applications page %>
+                                                                                            <% if (locals.session && session.role === 'student') { %>
+                                                                                                <p style="margin-top: 10px;"><a href="/applications/my" class="btn btn-secondary" style="width:100%; text-align:center;">View My Applications</a></p>
+                                                                                                <% } %>
+                                                                                                    <% } %>
+                                </div>
+                            </div>
+
+                            <%# Optional: Add other sidebar cards here - e.g., Related Jobs %>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
 
 
-     <p style="margin-top: 30px;"><a href="/jobs">Back to Job Listings</a></p>
-     <p><a href="/applications/my">View My Applications</a></p>
+    <%- include( '../partials/footer') %>
+        <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+            <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+        </a>
+
+        <script src="/home/assets/js/script.js" defer></script>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
+
 </html>
