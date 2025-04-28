@@ -1,65 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications | UMP</title>
+    <link rel="stylesheet" href="/jobs/css/job-table-style.css">
 
-    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-    <!-- --------- CSS ---------- -->
-    <link rel="stylesheet" href="/css/Home.css">
-    <!-- <link rel="stylesheet" href="/projects.css"> -->
-
-    <!-- --------- FONT AWESOME ---------- -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
-    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-
-    <!-- --------- FAVICON ---------- -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-
-    <title>job-connect | home.</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/home/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/jobs/assets/css/styles.css">
+    <link rel="stylesheet" href="/home/assets/css/style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-        *{
+        /* Basic placeholder styling - move to job-table-style.css */
+        /* These styles are kept identical to the original job view */
+        
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Ensure font-family is defined in linked CSS */
+        }
+        /* Ensure Poppins font is loaded via linked CSS if needed */
+        
+        body {
             font-family: 'Poppins', sans-serif;
+        }
+        
+        .breadcrumb-placeholder {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .tabs-container {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #f8f8f8;
+            color: #337ab7;
+            cursor: pointer;
+            /* Consider making non-active tabs links if functional */
+            margin-right: 3px;
+            margin-bottom: -1px;
+            /* Overlap border */
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+            /* Make it look connected */
+            color: #333;
+            font-weight: bold;
+            cursor: default;
+        }
+        
+        .page-wrapper {
+            color: #333;
+            padding: 20px;
+            /* Example padding */
+            max-width: 1200px;
+            /* Example max-width */
+            margin: 0 auto;
+            /* Center */
+        }
+        
+        .page-header h1 {
+            /* Style the h1 inside page-header */
+            font-size: 24px;
+            /* Example size */
+            margin-bottom: 15px;
+            color: #333;
+            /* Match hero title color perhaps */
+        }
+        
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        /* Add styles for .results-count, .pagination-links, .job-table-screenshot etc. */
+        /* These should be in your external CSS files */
+        /* Status styling (can be enhanced) */
+        
+        .status-Pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        
+        .status-Reviewed {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+        
+        .status-Interviewing {
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .status-Offered {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .status-Rejected {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .status-Withdrawn {
+            color: #6c757d;
+            font-weight: bold;
+        }
+        
+        .no-jobs {
+            /* Reuse class name, message changed in HTML */
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            margin-top: 20px;
+        }
+        
+        .error-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .job-table-screenshot {
+            /* Ensure styling exists in CSS */
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        .job-table-screenshot th,
+        .job-table-screenshot td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .job-table-screenshot th {
+            background-color: #f8f8f8;
+            font-weight: 600;
         }
     </style>
 </head>
+<chat-bot platform_id="b4f95226-505a-4958-af71-e06ab928b25e" user_id="4bb7148c-5509-46c4-8af0-2ee2674908d3" chatbot_id="574cefc0-9d08-47b1-a13e-d1ed3053dd36"><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">chatsimple</a></chat-bot>
+<script src="https://cdn.chatsimple.ai/chat-bot-loader.js" defer></script>
+
 <body>
-    <h1>My Job Applications</h1>
+    <header class="header" data-header>
+        <div class="container">
 
-    <% if (applications && applications.length > 0) { %>
-         <table>
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Date Applied</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% applications.forEach(app => { %>
-                    <tr>
-                        <td><a href="/jobs/<%= app.job_post_id %>"><%= app.job_title %></a></td>
-                        <td><%= new Date(app.application_date).toLocaleString() %></td>
-                        <td class="status"><%= app.status %></td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-         <p class="no-apps">You have not applied for any jobs yet.</p>
-    <% } %>
+            <a href="#" class="logo">
+                <i class="fa-solid fa-briefcase"></i> My Applications </a>
 
-     <p style="margin-top: 20px;"><a href="/jobs">Browse Available Jobs</a></p>
+            <nav class="navbar container" data-navbar>
+                <ul class="navbar-list">
+
+                    <li>
+                        <a href="/" class="navbar-link" data-nav-link>Home</a>
+                    </li>
+
+                    <li>
+                        <a href="/about" class="navbar-link" data-nav-link>About Us</a> </li>
+
+                    <li>
+                        <a href="/jobs" class="navbar-link" data-nav-link>Browse Jobs</a>
+                    </li>
+
+                    <%# Ensure 'session' object is passed to this view %>
+                        <% if (typeof session !== 'undefined' && session && session.role) { %>
+                            <% if (session.role === 'student') { %>
+                                <li><a href="/applications/my" class="navbar-link active" data-nav-link>My Applications</a></li>
+                                <% } else if (session.role === 'admin') { %>
+                                    <li><a href="/admin/jobs" class="navbar-link" data-nav-link>My Postings</a></li>
+                                    <li><a href="/admin/jobs/new" class="navbar-link" data-nav-link>Post New Job</a></li>
+                                    <% } %>
+                                        <% } %>
+
+                </ul>
+            </nav>
+
+            <% if (typeof session !== 'undefined' && session && session.role) { %>
+                <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+                <% } else { %>
+                    <a class="btn btn-secondary" href="/auth/login">Login</a>
+                    <% } %>
+
+
+                        <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+                <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
+                <ion-icon name="close-outline" aria-hidden="true" class="close-icon"></ion-icon>
+             </button>
+
+        </div>
+    </header>
+
+    <main>
+        <article class="article">
+
+            <section class="section hero" aria-label="hero">
+                <div class="container">
+                    <div class="hero-bg">
+                        <div class="hero-content">
+                            <h1 class="h1 hero-title">Track Your Job Applications</h1>
+                            <p class="hero-text">
+                                Review the status of jobs you've applied for within the university.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hero-form-wrapper">
+                        <form class="hero-form" action="/jobs" method="GET">
+                            <div class="input-wrapper">
+                                <label for="search" class="input-label">Search Applied Jobs:</label>
+                                <input type="search" name="search" id="search" placeholder="Search by title in applications?" class="input-field">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="category" class="input-label">Filter by type:</label>
+                                <select name="category" id="category" class="dropdown-list">
+                                     <option value="">All Job Types</option>
+                                     <option value="Tutor">Tutor</option>
+                                     <option value="Mentor">Mentor</option>
+                                     <option value="Technician">Technician</option>
+                                     <option value="Research Assistant">Research Assistant</option>
+                                     <option value="Admin Assistant">Admin Assistant</option>
+                                     <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="department" class="input-label">Filter by Faculty:</label>
+                                <select name="department" id="department" class="dropdown-list">
+                                     <option value="">All Departments/Faculties</option>
+                                     <option value="Computer Science">Computer Science</option>
+                                     <option value="Library Services / IT Support">Library Services / IT Support</option>
+                                     <option value="Faculty of Engineering / Student Affairs">Faculty of Engineering / Student Affairs</option>
+                                     <option value="Agriculture">Agriculture</option>
+                                     <option value="Sociology">Sociology</option>
+                                     <option value="Development">Development</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter Applications?</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div class="page-wrapper">
+
+        <div class="breadcrumb-placeholder">
+        </div>
+
+        <div class="page-header">
+            <h1>My Job Applications</h1>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tab">Quick Job Search</div>
+            <div class="tab active">My Applications List</div>
+        </div>
+
+        <%# --- START: Pagination Controls (Identical Structure, Adapted Variables) --- %>
+            <%# ****** Ensure totalApplications, currentPage, limit, totalPages, buildQueryString are passed from backend ****** %>
+                <% if (typeof totalApplications !== 'undefined' && totalApplications > 0 && typeof currentPage !== 'undefined' && typeof totalPages !== 'undefined' && typeof buildQueryString !== 'undefined') { %>
+                    <div class="pagination-controls">
+
+                        <%# Results Count - Adapted for applications %>
+                            <div class="results-count">
+                                <%
+                    const itemsPerPage = typeof limit !== 'undefined' ? limit : 10; // Use passed limit or default
+                    const totalItems = totalApplications;
+                    const startItem = Math.min((currentPage - 1) * itemsPerPage + 1, totalItems);
+                    const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+                %>
+                                    <span>Displaying <%= startItem %> - <%= endItem %> of <%= totalItems %> Applications</span>
+
+                                    <%# Limit Dropdown structure kept (still commented out like original) %>
+                                        <%# Requires JS or form wrap to function %>
+                            </div>
+
+                            <%# Pagination Links - Adapted for applications URL %>
+                                <div class="pagination-links">
+                                    <% if (totalPages > 1) { %>
+                                        <nav aria-label="Application results pagination">
+                                            <ul>
+                                                <%# First Page Link %>
+                                                    <li>
+                                                        <% if (currentPage > 1) { %>
+                                                            <a href="/applications/my?<%= buildQueryString({ page: 1 }) %>" title="First Page">&lt;&lt;</a>
+                                                            <% } else { %> <span class="disabled">&lt;&lt;</span>
+                                                                <% } %>
+                                                    </li>
+                                                    <%# Previous Page Link %>
+                                                        <li>
+                                                            <% if (currentPage > 1) { %>
+                                                                <a href="/applications/my?<%= buildQueryString({ page: currentPage - 1 }) %>" title="Previous Page">&lt;</a>
+                                                                <% } else { %> <span class="disabled">&lt;</span>
+                                                                    <% } %>
+                                                        </li>
+
+                                                        <%# Page Number Links (Example logic kept) %>
+                                                            <% if (currentPage > 2) { %>
+                                                                <li><a href="/applications/my?<%= buildQueryString({ page: 1 }) %>">1</a></li>
+                                                                <% if (currentPage > 3) { %>
+                                                                    <li><span class="ellipsis">...</span></li>
+                                                                    <% } %>
+                                                                        <% } %>
+                                                                            <% for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) { %>
+                                                                                <li>
+                                                                                    <% if (i === currentPage) { %>
+                                                                                        <span class="current-page"><%= i %></span>
+                                                                                        <% } else { %>
+                                                                                            <a href="/applications/my?<%= buildQueryString({ page: i }) %>">
+                                                                                                <%= i %>
+                                                                                            </a>
+                                                                                            <% } %>
+                                                                                </li>
+                                                                                <% } %>
+                                                                                    <% if (currentPage < totalPages - 1) { %>
+                                                                                        <% if (currentPage < totalPages - 2) { %>
+                                                                                            <li><span class="ellipsis">...</span></li>
+                                                                                            <% } %>
+                                                                                                <li>
+                                                                                                    <a href="/applications/my?<%= buildQueryString({ page: totalPages }) %>">
+                                                                                                        <%= totalPages %>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <% } %>
+
+                                                                                                    <%# Next Page Link %>
+                                                                                                        <li>
+                                                                                                            <% if (currentPage < totalPages) { %>
+                                                                                                                <a href="/applications/my?<%= buildQueryString({ page: currentPage + 1 }) %>" title="Next Page">&gt;</a>
+                                                                                                                <% } else { %> <span class="disabled">&gt;</span>
+                                                                                                                    <% } %>
+                                                                                                        </li>
+                                                                                                        <%# Last Page Link %>
+                                                                                                            <li>
+                                                                                                                <% if (currentPage < totalPages) { %>
+                                                                                                                    <a href="/applications/my?<%= buildQueryString({ page: totalPages }) %>" title="Last Page">&gt;&gt;</a>
+                                                                                                                    <% } else { %> <span class="disabled">&gt;&gt;</span>
+                                                                                                                        <% } %>
+                                                                                                            </li>
+                                            </ul>
+                                        </nav>
+                                        <% } %>
+                                </div>
+                    </div>
+                    <% } %>
+                        <%# --- END: Pagination Controls --- %>
+
+
+                            <div class="jobs-content">
+                                <h2>Applications</h2>
+                                <%# Display Error if exists %>
+                                    <% if (typeof error !== 'undefined' && error) { %>
+                                        <p class="no-jobs error-message">
+                                            <%= error %>
+                                        </p>
+                                        <% } %>
+
+                                            <%# Display Table or No Applications message %>
+                                                <%# ****** Ensure 'applications' array is passed from backend ****** %>
+                                                    <% if (typeof applications !== 'undefined' && applications && applications.length > 0) { %>
+                                                        <div class="table-responsive">
+                                                            <table class="job-table-screenshot">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Job Title</th>
+                                                                        <th>Date Applied</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% applications.forEach(app => { %>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="/jobs/<%= app.job_post_id %>" title="View Job Details">
+                                                                                    <%= app.job_title || 'N/A' %>
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Format date as needed %>
+                                                                                    <%= new Date(app.application_date).toLocaleDateString('en-ZA') %>
+                                                                                        <%= new Date(app.application_date).toLocaleTimeString('en-ZA', { hour: '2-digit', minute:'2-digit' }) %>
+                                                                            </td>
+                                                                            <td class="status-<%= app.status %>">
+                                                                                <%= app.status %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% }) %>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <% } else if (typeof error === 'undefined' || !error) { %>
+                                                            <%# Show message only if no apps AND no error %>
+                                                                <p class="no-jobs">You have not submitted any applications yet.</p>
+                                                                <p style="text-align: center; margin-top: 20px;">
+                                                                    <a href="/jobs" class="btn btn-primary">Browse Available Jobs</a>
+                                                                </p>
+                                                                <% } %>
+                            </div>
+
+                            <div class="footer-info" style="text-align: center; margin-top: 30px; font-size: 0.8em; color: #888;">
+                                APP V7.40.1.3 <br> Last date:
+                                <%= new Date().toLocaleDateString() %>
+                                    <%= new Date().toLocaleTimeString() %>
+                            </div>
+
+    </div>
+    <%- include('../partials/footer') %>
+
+        <a href="#" class="back-to-top-screenshot" aria-label="Back to top">&uarr;</a>
+
+        <script src="/home/assets/js/script.js" defer></script>
+        <script src="/jobs/js/job-table-script.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
+
 </html>
