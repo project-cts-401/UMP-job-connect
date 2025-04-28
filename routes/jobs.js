@@ -40,7 +40,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // Example: 5MB file size limit
+    limits: { fileSize: 50 * 1024 * 1024 } // Example: 5MB file size limit
 }).fields([ // Use .fields() for named file inputs
     { name: 'id_document', maxCount: 1 },
     { name: 'tax_proof', maxCount: 1 },
@@ -344,6 +344,7 @@ router.post('/:jobId/apply', (req, res) => {
         const idDocFile = req.files && req.files['id_document'] ? req.files['id_document'][0] : null;
         const taxProofFile = req.files && req.files['tax_proof'] ? req.files['tax_proof'][0] : null; // Optional?
         const bankProofFile = req.files && req.files['bank_proof'] ? req.files['bank_proof'][0] : null;
+        const transcriptFile = req.files && req.files['bank_proof'] ? req.files['bank_proof'][0] : null;
 
         // 4. Basic validation: Check if required files are present
         // Adjust this logic based on whether tax_proof is truly required
