@@ -84,6 +84,7 @@ h2 {
     margin-top: 5px;
     /* Reduced margin */
     font-size: 0.9em;
+    border-radius: 15px;
     /* Slightly smaller font in table */
 }
 
