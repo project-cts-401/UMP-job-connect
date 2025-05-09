@@ -25,6 +25,19 @@
             document.body.appendChild(cs);
         })();
     </script>
+    <style>
+        .hero-form-wrapper button {
+            transition: all 0.358s ease-in-out;
+            gap: 0.5rem;
+            font-weight: 100;
+        }
+        
+        .hero-form-wrapper button:hover {
+            font-size: 2.2rem;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
     <main>
         <article class="article">
 
@@ -36,12 +49,7 @@
                 <div class="container">
                     <div class="hero-bg">
                         <div class="hero-content">
-                            <h1 class="h1 hero-title">
-                                Your Gateway to <span class="span">On-Campus</span> Employment
-                            </h1>
-                            <p class="hero-text">
-                                Search and apply for diverse job opportunities like tutoring, mentoring, and technician roles offered by various university departments.
-                            </p>
+
                         </div>
                     </div>
 
@@ -65,7 +73,7 @@
                         </select>
                             </div>
                             <div class="input-wrapper">
-                                <label for="department" class="input-label">Filter by Department/Faculty:</label>
+                                <label for="department" class="input-label">Filter by Faculty:</label>
                                 <select name="department" id="department" class="dropdown-list">
                             <option value="">All Departments/Faculties</option>
                             <option value="Computer Science">Computer Science</option>
@@ -76,7 +84,9 @@
                             <option value="Development">Development</option>
                             </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Search Jobs</button>
+                            <button type="submit" class="btn btn-primary" style="background: none; display: flex; align-items: center; justify-content: center;">
+                                <p style="color: #333;">Search </p><i class="fa-solid fa-magnifying-glass" style="color: #333;"></i>
+                            </button>
                         </form>
                     </div>
                 </div>

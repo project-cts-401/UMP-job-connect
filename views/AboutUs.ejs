@@ -94,6 +94,95 @@
             font-size: 1.4rem;
             line-height: 1.4;
         }
+        
+        .team-section {
+            width: 100%;
+            text-align: center;
+            background-color: #f9f9f9;
+            /* Light background for the section */
+        }
+        
+        .team-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+            /* Darker heading color */
+        }
+        
+        .team-section p {
+            font-size: 1.5rem;
+            color: #555;
+            /* Slightly darker text */
+            margin-bottom: 30px;
+        }
+        
+        .team-section .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            /* Space between team members */
+        }
+        
+        .team-member {
+            background-color: #fff;
+            /* White background for team member cards */
+            width: fit-content;
+            border-radius: 10px;
+            /* Rounded corners for the cards */
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for depth */
+            transition: transform 0.3s ease;
+            /* Smooth transition for hover effect */
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            /* Move card up slightly on hover */
+        }
+        
+        .team-member img {
+            width: 150px;
+            /* Fixed size for team member images */
+            height: 150px;
+            border-radius: 50%;
+            /* Make images circular */
+            object-fit: cover;
+            /* Ensure images cover the circular area */
+            margin-bottom: 15px;
+        }
+        
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #222;
+            /* Very dark heading */
+        }
+        
+        .team-member p {
+            font-size: 1.1rem;
+            color: #666;
+            /* Medium gray text */
+        }
+        
+        .info-section {
+            padding: 2.5em 0;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .info-section .left-container {
+            width: 100%;
+            /* Full width for the left container */
+        }
+        
+        .info-section .left-container img {
+            width: 100%;
+            border-radius: 10px;
+            /* Full width for the left container */
+        }
     </style>
 </head>
 <chat-bot platform_id="b4f95226-505a-4958-af71-e06ab928b25e" user_id="4bb7148c-5509-46c4-8af0-2ee2674908d3" chatbot_id="574cefc0-9d08-47b1-a13e-d1ed3053dd36"><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">chatsimple</a></chat-bot>
@@ -127,6 +216,38 @@
                     <p>Our platform integrates with various university systems to provide a unified experience.</p>
                 </div>
             </section>
+            <section class="info-section">
+                <div class="left-container"><img src="https://www.ump.ac.za/UMPSite/media/UMPMedia/System/Main%20Banner/_MG_2001.JPG" alt=""></div>
+                <div class="right-container"></div>
+            </section>
+            <!-- <section class="team-section">
+                <div class="container" style="flex-direction: column;">
+                    <h2>Our Team</h2>
+                    <p>Meet the dedicated individuals behind our platform.</p>
+                </div>
+                <div class="container">
+                    <div class="team-member">
+                        <img src="https://placehold.co/200x200/EEE/31343C" alt="Team Member 1">
+                        <h3>John Doe</h3>
+                        <p>Project Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://placehold.co/200x200/EEE/31343C" alt="Team Member 2">
+                        <h3>Jane Smith</h3>
+                        <p>Lead Developer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://placehold.co/200x200/EEE/31343C" alt="Team Member 3">
+                        <h3>Emily Johnson</h3>
+                        <p>UI/UX Designer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://placehold.co/200x200/EEE/31343C" alt="Team Member 4">
+                        <h3>Michael Brown</h3>
+                        <p>Marketing Specialist</p>
+                    </div>
+                </div>
+            </section> -->
         </div>
         <%-include('./partials/footer.ejs')-%>
 </body>

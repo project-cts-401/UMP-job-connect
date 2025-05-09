@@ -50,6 +50,7 @@ app.use('/AboutUs', require("./routes/about"));
 app.use('/Admin', requireLogin, requireAdmin, adminRoutes); // Requires login AND admin role
 app.use('/Jobs', jobRoutes); // Requires login (students apply within specific POST route)
 app.use('/applications', requireLogin, requireStudent, applicationRoutes); // Requires login AND student role
+app.use('/contactUs', require("./routes/contact"));
 
 const PORT = 2403;
 
