@@ -5,6 +5,7 @@ const db = require('../database/connection'); // Assuming your db connection is 
 const multer = require('multer'); // <-- Added for file uploads
 const path = require('path'); // <-- Added for handling file paths
 const fs = require('fs'); // <-- Added for file system operations (checking/deleting files)
+const { requireLogin, requireAdmin, requireStudent } = require('../middleware/authMiddleware');
 
 // --- Multer Configuration (Place near the top) ---
 const uploadDir = path.join(__dirname, '..', 'uploads', 'application_docs'); // Store uploads
@@ -217,7 +218,7 @@ router.get('/:jobId', (req, res) => {
 
 
 // *** NEW *** GET route to DISPLAY the detailed application form
-router.get('/:jobId/apply', (req, res) => {
+router.get('/:jobId/apply', requireLogin, (req, res) => {
     const jobId = req.params.jobId;
     const studentId = req.session.userId;
 
@@ -277,7 +278,7 @@ router.get('/:jobId/apply', (req, res) => {
 
 
 // *** MODIFIED *** POST route for a student to apply (handles detailed form and files)
-router.post('/:jobId/apply', (req, res) => {
+router.post('/:jobId/apply', requireLogin, (req, res) => {
     const jobId = req.params.jobId;
     const studentId = req.session.userId;
 

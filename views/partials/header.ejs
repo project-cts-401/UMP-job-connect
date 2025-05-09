@@ -1,0 +1,95 @@
+<body id="top">
+
+    <!-- 
+      - #HEADER
+    -->
+
+    <script type="text/javascript">
+        (function() {
+            // Create and append the chat-bot element
+            var chatBotEl = document.createElement('chat-bot');
+            chatBotEl.setAttribute('platform_id', 'b4f95226-505a-4958-af71-e06ab928b25e');
+            chatBotEl.setAttribute('user_id', '4bb7148c-5509-46c4-8af0-2ee2674908d3');
+            chatBotEl.setAttribute('chatbot_id', '574cefc0-9d08-47b1-a13e-d1ed3053dd36');
+
+            var chatbotLink = document.createElement('a');
+            chatbotLink.href = 'https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral';
+            chatbotLink.innerHTML = 'chatsimple';
+            chatBotEl.appendChild(chatbotLink);
+
+            document.body.appendChild(chatBotEl);
+
+            // Dynamically load the external script
+            var cs = document.createElement('script');
+            cs.src = 'https://chatsimple-widget.s3.us-east-2.amazonaws.com/chat-bot-loader.js';
+            document.body.appendChild(cs);
+        })();
+    </script>
+    <main>
+        <article class="article">
+
+            <!-- 
+          - #HERO
+        -->
+
+            <section class="section hero" aria-label="hero">
+                <div class="container">
+                    <div class="hero-bg">
+                        <div class="hero-content">
+                            <h1 class="h1 hero-title">
+                                Your Gateway to <span class="span">On-Campus</span> Employment
+                            </h1>
+                            <p class="hero-text">
+                                Search and apply for diverse job opportunities like tutoring, mentoring, and technician roles offered by various university departments.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hero-form-wrapper">
+                        <form class="hero-form" action="/jobs" method="GET">
+                            <div class="input-wrapper">
+                                <label for="search" class="input-label">Job title:</label>
+                                <input type="search" name="search" id="search" placeholder="Search by title" class="input-field">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="category" class="input-label">Select job type:</label>
+                                <select name="category" id="category" class="dropdown-list">
+                            <option value="">All Job Types</option>
+                            <option value="Tutor">Tutor</option>
+                            <option value="Mentor">Mentor</option>
+                            <option value="Technician">Technician</option>
+                            <option value="Research Assistant">Research Assistant</option>
+                            <option value="Admin Assistant">Admin Assistant</option>
+                            <option value="Other">Other</option>
+                        </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="department" class="input-label">Filter by Department/Faculty:</label>
+                                <select name="department" id="department" class="dropdown-list">
+                            <option value="">All Departments/Faculties</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Library Services / IT Support">Library Services / IT Support</option>
+                            <option value="Faculty of Engineering / Student Affairs">Faculty of Engineering / Student Affairs</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Sociology">Sociology</option>
+                            <option value="Development">Development</option>
+                            </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search Jobs</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+    <!-- 
+      - #FOOTER
+    -->
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

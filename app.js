@@ -38,15 +38,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const adminRoutes = require('./routes/admin');
 const jobRoutes = require('./routes/jobs');
+const AboutRoutes = require('./routes/about');
 const applicationRoutes = require('./routes/applications');
 const { requireLogin, requireAdmin, requireStudent } = require('./middleware/authMiddleware');
 
 app.use('/', require("./routes/home"));
 app.use('/auth', require("./routes/auth"));
+app.use('/AboutUs', require("./routes/about"));
 
 // Apply middleware directly to route groups
-app.use('/admin', requireLogin, requireAdmin, adminRoutes); // Requires login AND admin role
-app.use('/jobs', requireLogin, jobRoutes); // Requires login (students apply within specific POST route)
+app.use('/Admin', requireLogin, requireAdmin, adminRoutes); // Requires login AND admin role
+app.use('/Jobs', jobRoutes); // Requires login (students apply within specific POST route)
 app.use('/applications', requireLogin, requireStudent, applicationRoutes); // Requires login AND student role
 
 const PORT = 2403;
