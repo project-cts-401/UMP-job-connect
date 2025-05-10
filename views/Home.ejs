@@ -36,6 +36,18 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+        
+        .hero-form-wrapper button {
+            transition: all 0.358s ease-in-out;
+            gap: 0.5rem;
+            font-weight: 100;
+        }
+        
+        .hero-form-wrapper button:hover {
+            font-size: 2.2rem;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <chat-bot platform_id="b4f95226-505a-4958-af71-e06ab928b25e" user_id="4bb7148c-5509-46c4-8af0-2ee2674908d3" chatbot_id="574cefc0-9d08-47b1-a13e-d1ed3053dd36"><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">chatsimple</a></chat-bot>
@@ -58,7 +70,7 @@
                 <ul class="navbar-list">
 
                     <li>
-                        <a href="/" class="navbar-link" data-nav-link>Home</a>
+                        <a href="/" class="navbar-link" data-nav-link style="color: hsl(194, 100%, 28%);">Home</a>
                     </li>
 
                     <li>
@@ -66,11 +78,11 @@
                     </li>
 
                     <li>
-                        <a href="/ontactUs" class="navbar-link" data-nav-link>ontact Us</a>
+                        <a href="/contactUs" class="navbar-link" data-nav-link>Contact Us</a>
                     </li>
 
                     <li>
-                        <a href="/jobs" class="navbar-link" data-nav-link>Browse Jobs</a>
+                        <a href="/jobs" class="navbar-link" data-nav-link>Jobs</a>
                     </li>
 
                     <% if (session && session.role) { %>
@@ -158,7 +170,7 @@
                         </select>
                             </div>
                             <div class="input-wrapper">
-                                <label for="department" class="input-label">Filter by Department/Faculty:</label>
+                                <label for="department" class="input-label">Filter by Faculty:</label>
                                 <select name="department" id="department" class="dropdown-list">
                             <option value="">All Departments/Faculties</option>
                             <option value="Computer Science">Computer Science</option>
@@ -169,7 +181,9 @@
                             <option value="Development">Development</option>
                             </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Search Jobs</button>
+                            <button type="submit" class="btn btn-primary" style="background: none; display: flex; align-items: center; justify-content: center;">
+                                <p style="color: #333;">Search </p><i class="fa-solid fa-magnifying-glass" style="color: #333;"></i>
+                            </button>
                         </form>
                     </div>
                 </div>

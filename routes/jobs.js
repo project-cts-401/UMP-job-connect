@@ -45,7 +45,8 @@ const upload = multer({
 }).fields([ // Use .fields() for named file inputs
     { name: 'id_document', maxCount: 1 },
     { name: 'tax_proof', maxCount: 1 },
-    { name: 'bank_proof', maxCount: 1 }
+    { name: 'bank_proof', maxCount: 1 },
+    { name: 'resume', maxCount: 1 }
 ]);
 // --- End Multer Configuration ---
 
@@ -315,7 +316,7 @@ router.post('/:jobId/apply', requireLogin, (req, res) => {
 
         // --- Helper function to clean up uploaded files ---
         const cleanupFiles = (files) => {
-            const fileInputs = ['id_document', 'tax_proof', 'bank_proof'];
+            const fileInputs = ['id_document', 'tax_proof', 'bank_proof', 'resume']; // Add any other file inputs here
             fileInputs.forEach(fieldName => {
                 if (files && files[fieldName] && files[fieldName][0]) {
                     fs.unlink(files[fieldName][0].path, (err) => { // Use asynchronous unlink
@@ -323,6 +324,7 @@ router.post('/:jobId/apply', requireLogin, (req, res) => {
                     });
                 }
             });
+
         };
 
 
@@ -345,7 +347,8 @@ router.post('/:jobId/apply', requireLogin, (req, res) => {
         const idDocFile = req.files && req.files['id_document'] ? req.files['id_document'][0] : null;
         const taxProofFile = req.files && req.files['tax_proof'] ? req.files['tax_proof'][0] : null; // Optional?
         const bankProofFile = req.files && req.files['bank_proof'] ? req.files['bank_proof'][0] : null;
-        const transcriptFile = req.files && req.files['bank_proof'] ? req.files['bank_proof'][0] : null;
+        // const transcriptFile = req.files && req.files['transcript'] ? req.files['transcript'][0] : null;
+        const resumeFile = req.files && req.files['resume'] ? req.files['resume'][0] : null;
 
         // 4. Basic validation: Check if required files are present
         // Adjust this logic based on whether tax_proof is truly required
@@ -387,6 +390,7 @@ router.post('/:jobId/apply', requireLogin, (req, res) => {
         const idDocPath = idDocFile ? path.relative(projectRoot, idDocFile.path) : null;
         const taxProofPath = taxProofFile ? path.relative(projectRoot, taxProofFile.path) : null;
         const bankProofPath = bankProofFile ? path.relative(projectRoot, bankProofFile.path) : null;
+        const resumePath = resumeFile ? path.relative(projectRoot, resumeFile.path) : null;
 
         // --- 7. Proceed with Database Operations ---
         const checkSql = `SELECT id FROM applications WHERE job_post_id = ? AND student_id = ?`;
@@ -407,7 +411,7 @@ router.post('/:jobId/apply', requireLogin, (req, res) => {
             // Ensure column names match your ALTER TABLE commands exactly
             const insertSql = `
                 INSERT INTO applications (
-                    job_post_id, student_id, status, application_date,
+                    job_post_id, student_id, status, application_date, resume_path,
                     title, initials, identity_number, appointment_from, appointment_to,
                     postal_address, postal_code, residential_address, residential_code,
                     cellular_phone, bank_name, branch_code, account_number, account_holder_name,
@@ -415,13 +419,13 @@ router.post('/:jobId/apply', requireLogin, (req, res) => {
                     id_document_path, tax_proof_path, bank_proof_path
                 ) VALUES (
                     ?, ?, ?, CURRENT_TIMESTAMP,
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 )
             `;
 
             const params = [
-                jobId, studentId, 'Submitted',
-                title, initials, identity_number, appointment_from, appointment_to,
+                jobId, studentId, 'submitted',
+                resumePath, title, initials, identity_number, appointment_from, appointment_to,
                 postal_address, postal_code, residential_address, residential_code,
                 cellular_phone, bank_name, branch_code, account_number, account_holder_name,
                 income_tax_number, submission_date,
